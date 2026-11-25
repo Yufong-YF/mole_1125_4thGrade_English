@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>摩爾來找碴｜四年級英文單字課堂解謎互動教學網</title>
+  <style>
+    :root {
+      --bg-cream: #fbf7ef;
+      --bg-paper: #fffdf8;
+      --bg-sand: #f4ebd9;
+      --ink-brown: #3b2d1f;
+      --ink-muted: #6e5a46;
+      --border-brown: #4a3723;
+      --forest: #244b35;
+      --forest-light: #356b4d;
+      --amber: #e68a2e;
+      --amber-soft: #fdebd0;
+      --berry: #c94a38;
+      --berry-soft: #fadbd8;
+      --olive: #4c8c5c;
+      --olive-soft: #d4efdf;
+      --sky-soft: #d6eaf8;
+      --shadow-solid: 0 5px 0 #4a3723;
+      --shadow-sm: 0 3px 0 #4a3723;
+      --font-main: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      --font-en: "Fredoka", "Nunito", "Comic Sans MS", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--ink-brown);
+      background-color: var(--bg-cream);
+      background-image:
+        radial-gradient(rgba(139, 108, 73, 0.14) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(139, 108, 73, 0.08) 1.5px, var(--bg-cream) 1.5px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+      line-height: 1.55;
+      overflow-x: hidden;
+      padding-bottom: 48px;
+    }
+
+    .font-en {
+      font-family: var(--font-en);
+    }
+
+    /* 頂部懸浮標題與計時列 */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(251, 247, 239, 0.96);
+      border-bottom: 3px solid var(--border-brown);
+      padding: 10px 16px;
+      box-shadow: 0 3px 10px rgba(74, 55, 35, 0.08);
+    }
+
+    .topbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: var(--amber);
+      border: 3px solid var(--border-brown);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--forest);
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+    }
+
+    /* 計時器膠囊 */
+    .timer-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-paper);
+      border: 2.5px solid var(--border-brown);
+      border-radius: 999px;
+      padding: 6px 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timer-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--forest);
+    }
+
+    .timer-digits {
+      font-family: var(--font-en);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--berry);
+      letter-spacing: 0.04em;
+    }
+
+    /* 通用手札按鈕 */
+    .btn {
+      font-family: var(--font-main);
+      font-weight: 800;
+      font-size: 0.92rem;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 14px;
+      padding: 8px 14px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--ink-brown);
+      background: var(--bg-paper);
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      filter: brightness(1.03);
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--border-brown);
+    }
+
+    .btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .btn-sm {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+
+    .btn-amber {
+      background: var(--amber);
+      color: #fff;
+    }
+
+    .btn-forest {
+      background: var(--forest);
+      color: #fff;
+    }
+
+    .btn-olive {
+      background: var(--olive);
+      color: #fff;
+    }
+
+    .btn-berry {
+      background: var(--berry);
+      color: #fff;
+    }
+
+    .btn-paper {
+      background: var(--bg-paper);
+      color: var(--ink-brown);
+    }
+
+    /* 主容器 */
+    .container {
+      max-width: 1120px;
+      margin: 22px auto 0;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    /* 卡片面板 */
+    .card-panel {
+      background: var(--bg-paper);
+      border: 3px solid var(--border-brown);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow-solid);
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 2px solid var(--border-brown);
+    }
+
+    .badge-berry {
+      background: var(--berry-soft);
+      color: var(--berry);
+    }
+
+    .badge-amber {
+      background: var(--amber-soft);
+      color: #9c520c;
+    }
+
+    .badge-olive {
+      background: var(--olive-soft);
+      color: var(--forest);
+    }
+
+    .badge-forest {
+      background: var(--forest);
+      color: #fff;
+    }
+
+    /* 緊急任務故事橫幅 */
+    .story-hero {
+      background: linear-gradient(135deg, #fffdf8 0%, #fef4e2 100%);
+      border: 3px solid var(--border-brown);
+      border-radius: 26px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow-solid);
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 820px) {
+      .story-hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .story-title {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--forest);
+      margin: 10px 0 8px;
+    }
+
+    .story-text {
+      font-size: 0.98rem;
+      color: var(--ink-brown);
+      font-weight: 600;
+    }
+
+    .story-text strong {
+      color: var(--berry);
+      background: var(--berry-soft);
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    .rules-box {
+      background: var(--bg-paper);
+      border: 2.5px dashed var(--border-brown);
+      border-radius: 18px;
+      padding: 14px 16px;
+    }
+
+    .rules-box h3 {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+
+    .rule-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      font-weight: 700;
+      padding: 5px 0;
+      border-bottom: 1px dashed rgba(74, 55, 35, 0.25);
+    }
+
+    .rule-item:last-child {
+      border-bottom: none;
+    }
+
+    .rule-pts {
+      background: var(--amber-soft);
+      border: 1.5px solid var(--border-brown);
+      border-radius: 8px;
+      padding: 1px 8px;
+      font-weight: 900;
+      color: #9c520c;
+    }
+
+    /* 抽籤機區塊樣式 */
+    .lottery-panel {
+      background: linear-gradient(135deg, #fffdf6 0%, #fdebd0 100%);
+      border: 3px solid var(--border-brown);
+      border-radius: 24px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow-solid);
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      align-items: stretch;
+      gap: 18px;
+    }
+
+    @media (max-width: 860px) {
+      .lottery-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .team-setup-box {
+      background: #fff;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 18px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .color-choices {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .color-opt {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      border-radius: 12px;
+      border: 2px solid var(--border-brown);
+      background: var(--bg-cream);
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .color-opt.selected {
+      background: var(--amber-soft);
+      border-color: var(--berry);
+      box-shadow: 0 2px 0 var(--berry);
+    }
+
+    .color-opt:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .lottery-display {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 18px;
+      padding: 10px 18px;
+      box-shadow: var(--shadow-sm);
+      min-width: 240px;
+    }
+
+    .lottery-display {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 18px;
+      padding: 10px 18px;
+      box-shadow: var(--shadow-sm);
+      min-width: 260px;
+    }
+
+    .lottery-reel {
+      font-family: var(--font-en);
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: var(--berry);
+      background: var(--amber-soft);
+      border: 2px solid var(--border-brown);
+      border-radius: 12px;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .variant-pill {
+      display: inline-block;
+      background: var(--forest);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* 區塊標題 */
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--forest);
+    }
+
+    /* 四大關卡導覽分頁 */
+    .stage-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .stage-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .stage-tab {
+      background: var(--bg-paper);
+      border: 2.5px solid var(--border-brown);
+      border-radius: 16px;
+      padding: 12px 14px;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.15s ease;
+    }
+
+    .stage-tab.active {
+      background: var(--forest);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .stage-tab.solved {
+      border-color: var(--olive);
+    }
+
+    .stage-tab-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      font-weight: 800;
+      opacity: 0.9;
+      margin-bottom: 3px;
+    }
+
+    .stage-tab-name {
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .stage-panel {
+      display: none;
+    }
+
+    .stage-panel.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stage-head {
+      border-bottom: 2px dashed rgba(74, 55, 35, 0.25);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .stage-head h3 {
+      font-size: 1.32rem;
+      font-weight: 900;
+      color: var(--forest);
+      margin: 6px 0 4px;
+    }
+
+    .stage-head p {
+      font-size: 0.94rem;
+      color: var(--ink-muted);
+      font-weight: 700;
+    }
+
+    /* 第 1 關：失蹤的招牌卡片 */
+    .signs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 820px) {
+      .signs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sign-card {
+      background: #fff;
+      border: 3px solid var(--border-brown);
+      border-radius: 20px;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sign-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .sign-card.selected {
+      border-color: var(--berry);
+      background: #fff6f5;
+      box-shadow: 0 5px 0 var(--berry);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--bg-sand);
+      border: 2px solid var(--border-brown);
+      border-radius: 10px;
+      padding: 2px 10px;
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+
+    .sign-card.selected .card-badge {
+      background: var(--berry);
+      color: #fff;
+      border-color: var(--berry);
+    }
+
+    .svg-frame {
+      width: 100%;
+      height: 120px;
+      border-radius: 14px;
+      border: 2px solid var(--border-brown);
+      overflow: hidden;
+      margin-bottom: 10px;
+      background: #fdfaf2;
+    }
+
+    .sign-plaque {
+      display: inline-block;
+      background: #d99b52;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 12px;
+      padding: 6px 18px;
+      font-family: var(--font-en);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #2b1b0e;
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.12);
+    }
+
+    .sign-plaque.changed {
+      background: #a9dfbf;
+      color: #145a32;
+    }
+
+    .fix-box {
+      display: none;
+      margin-top: 12px;
+      padding: 10px;
+      background: #fff;
+      border: 2px dashed var(--berry);
+      border-radius: 14px;
+      cursor: default;
+    }
+
+    .sign-card.selected .fix-box {
+      display: block;
+    }
+
+    .word-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .word-pill {
+      font-family: var(--font-en);
+      font-size: 0.92rem;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 2px solid var(--border-brown);
+      background: var(--bg-cream);
+      color: var(--ink-brown);
+      cursor: pointer;
+    }
+
+    .word-pill:hover {
+      background: var(--amber-soft);
+    }
+
+    .word-pill.active {
+      background: var(--forest);
+      color: #fff;
+      border-color: var(--forest);
+    }
+
+    /* 第 2 關：庫拉的亂碼分類清單 */
+    .menu-workspace {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 820px) {
+      .menu-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scramble-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scramble-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 16px;
+      padding: 10px 14px;
+    }
+
+    .wrong-word-tag {
+      font-family: var(--font-en);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--berry);
+      background: var(--berry-soft);
+      border: 2px solid var(--berry);
+      border-radius: 10px;
+      padding: 4px 10px;
+      text-decoration: line-through;
+      min-width: 105px;
+      text-align: center;
+    }
+
+    .spell-input {
+      font-family: var(--font-en);
+      font-size: 1.05rem;
+      font-weight: 800;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 10px;
+      padding: 6px 12px;
+      width: 135px;
+      color: var(--forest);
+      background: var(--bg-cream);
+    }
+
+    .spell-input:focus {
+      outline: none;
+      border-color: var(--amber);
+      background: #fff;
+    }
+
+    .cat-btn-group {
+      display: flex;
+      gap: 6px;
+      margin-left: auto;
+    }
+
+    .cat-btn {
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 2px solid var(--border-brown);
+      background: var(--bg-paper);
+      cursor: pointer;
+    }
+
+    .cat-btn.active-food {
+      background: var(--amber);
+      color: #fff;
+    }
+
+    .cat-btn.active-drink {
+      background: #2e86c1;
+      color: #fff;
+    }
+
+    .live-menu-board {
+      background: #fffaf0;
+      border: 3px solid var(--border-brown);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: inset 0 0 0 4px #f5e6cc;
+    }
+
+    .live-menu-title {
+      text-align: center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--forest);
+      border-bottom: 2px solid var(--border-brown);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .menu-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .menu-col {
+      background: #fff;
+      border: 2px solid var(--border-brown);
+      border-radius: 14px;
+      padding: 10px;
+      min-height: 140px;
+    }
+
+    .menu-col h4 {
+      font-size: 0.88rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 8px;
+      color: var(--ink-brown);
+    }
+
+    .menu-chip {
+      font-family: var(--font-en);
+      font-weight: 800;
+      font-size: 0.98rem;
+      background: var(--olive-soft);
+      border: 1.5px solid var(--forest);
+      color: var(--forest);
+      border-radius: 8px;
+      padding: 4px 10px;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    /* 第 3 關：矛盾的偵探日記 */
+    .diary-paper {
+      background: #fffef9;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 18px;
+      padding: 22px;
+      font-family: var(--font-en);
+      font-size: 1.32rem;
+      line-height: 2;
+      color: var(--ink-brown);
+      background-image: repeating-linear-gradient(transparent, transparent 43px, rgba(74,55,35,0.12) 44px);
+    }
+
+    .diary-word {
+      display: inline-block;
+      background: #fff3cd;
+      border: 2.5px dashed var(--amber);
+      border-radius: 10px;
+      padding: 0 10px;
+      font-weight: 900;
+      color: var(--berry);
+      cursor: pointer;
+      transition: transform 0.12s ease;
+    }
+
+    .diary-word:hover {
+      transform: scale(1.06);
+      background: #ffe8a1;
+    }
+
+    .diary-word.fixed {
+      background: var(--olive-soft);
+      border: 2.5px solid var(--olive);
+      color: var(--forest);
+    }
+
+    .diary-editor-box {
+      display: none;
+      margin-top: 14px;
+      background: var(--bg-sand);
+      border: 2.5px solid var(--border-brown);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+
+    .diary-editor-box.open {
+      display: block;
+    }
+
+    .choice-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    /* 第 4 關：修復大百科插畫 */
+    .stage4-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 820px) {
+      .stage4-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sentence-card {
+      background: #fff;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .sentence-card.selected-err {
+      border-color: var(--berry);
+      background: #fff6f5;
+    }
+
+    .sentence-text {
+      font-family: var(--font-en);
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--ink-brown);
+    }
+
+    .styled-select {
+      font-family: var(--font-en);
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 5px 10px;
+      border: 2px solid var(--border-brown);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--forest);
+    }
+
+    .canvas-box {
+      background: #fff;
+      border: 3px solid var(--border-brown);
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .canvas-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .swatch-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .swatch {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2.5px solid var(--border-brown);
+      cursor: pointer;
+    }
+
+    .swatch.active {
+      transform: scale(1.18);
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--border-brown);
+    }
+
+    #art-canvas {
+      width: 100%;
+      height: 210px;
+      border: 2px dashed rgba(74,55,35,0.35);
+      border-radius: 12px;
+      background: #fffdf9;
+      touch-action: none;
+      cursor: crosshair;
+      display: block;
+    }
+
+    /* 關卡底部按鈕列與提示 */
+    .stage-footer-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 2px dashed rgba(74,55,35,0.25);
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 2.5px solid var(--border-brown);
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .feedback.ok {
+      display: block;
+      background: var(--olive-soft);
+      color: var(--forest);
+    }
+
+    .feedback.err {
+      display: block;
+      background: var(--berry-soft);
+      color: var(--berry);
+    }
+
+    /* 第三區：最終密碼與小組計分板 */
+    .vault-score-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 860px) {
+      .vault-score-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .puzzle-slots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .puzzle-slot {
+      background: var(--bg-sand);
+      border: 2.5px dashed var(--border-brown);
+      border-radius: 16px;
+      padding: 12px 6px;
+      text-align: center;
+    }
+
+    .puzzle-slot.unlocked {
+      background: var(--amber-soft);
+      border-style: solid;
+      border-color: var(--amber);
+    }
+
+    .puzzle-letter {
+      font-family: var(--font-en);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--forest);
+    }
+
+    .passcode-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .passcode-input {
+      font-family: var(--font-en);
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-align: center;
+      border: 3px solid var(--border-brown);
+      border-radius: 14px;
+      padding: 8px 14px;
+      width: 170px;
+      background: #fff;
+      color: var(--forest);
+    }
+
+    /* 四色小隊計分板 */
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .teams-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .team-card {
+      background: #fff;
+      border: 2.5px solid var(--border-brown);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .team-card.my-team {
+      border-color: var(--amber);
+      background: #fffdf5;
+      box-shadow: 0 4px 0 var(--amber);
+    }
+
+    .team-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-weight: 900;
+      font-size: 0.98rem;
+    }
+
+    .team-display-name {
+      font-weight: 900;
+      color: var(--ink-brown);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .team-pts {
+      font-family: var(--font-en);
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--amber);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .team-stars {
+      font-size: 0.9rem;
+      min-height: 22px;
+      font-weight: 700;
+      color: var(--ink-muted);
+    }
+
+    .turn-badge {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--bg-sand);
+      color: var(--ink-muted);
+      border: 1.5px solid var(--border-brown);
+      align-self: flex-start;
+    }
+
+    .team-card.my-team .turn-badge {
+      background: var(--amber);
+      color: #fff;
+      border-color: var(--border-brown);
+    }
+
+    /* 教師密碼歸零彈窗 */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(59, 45, 31, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 120;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-paper);
+      border: 3px solid var(--border-brown);
+      border-radius: 22px;
+      padding: 22px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: var(--shadow-solid);
+      text-align: center;
+    }
+
+    /* 榮譽證書彈窗樣式 */
+    .cert-modal-card {
+      background: linear-gradient(135deg, #fffef8 0%, #fdf3dc 100%);
+      border: 4px solid var(--border-brown);
+      border-radius: 26px;
+      padding: 14px;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: 0 10px 0 var(--border-brown);
+      text-align: center;
+      animation: popCert 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes popCert {
+      0% { transform: scale(0.82); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .cert-inner-border {
+      border: 3px double #c68b2c;
+      border-radius: 18px;
+      padding: 22px 20px;
+      background: #fffdf9;
+      position: relative;
+    }
+
+    .cert-ribbon {
+      display: inline-block;
+      background: var(--forest);
+      color: #fff;
+      border: 2px solid var(--border-brown);
+      border-radius: 999px;
+      padding: 4px 16px;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .cert-heading {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--forest);
+      margin-bottom: 6px;
+    }
+
+    .cert-team-banner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--amber-soft);
+      border: 2.5px solid var(--border-brown);
+      border-radius: 16px;
+      padding: 8px 22px;
+      margin: 12px 0;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--ink-brown);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cert-stamp {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      border: 3px dashed var(--berry);
+      color: var(--berry);
+      font-weight: 900;
+      font-size: 0.76rem;
+      transform: rotate(-10deg);
+      background: rgba(250, 219, 216, 0.35);
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #cert-modal, #cert-modal * {
+        visibility: visible;
+      }
+      #cert-modal {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    .team-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .team-card.active-turn {
+      border-color: var(--amber);
+      background: #fffdf5;
+      box-shadow: 0 4px 0 var(--amber);
+    }
+
+    .team-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+
+    .team-name-input {
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--ink-brown);
+      background: var(--bg-cream);
+      border: 2px solid var(--border-brown);
+      border-radius: 10px;
+      padding: 4px 8px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .team-name-input:focus {
+      outline: none;
+      border-color: var(--amber);
+      background: #fff;
+    }
+
+    .team-pts {
+      font-family: var(--font-en);
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--amber);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .team-stars {
+      font-size: 0.9rem;
+      min-height: 22px;
+      font-weight: 700;
+      color: var(--ink-muted);
+    }
+
+    .turn-badge {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--bg-sand);
+      color: var(--ink-muted);
+      border: 1.5px solid var(--border-brown);
+      align-self: flex-start;
+    }
+
+    .team-card.active-turn .turn-badge {
+      background: var(--amber);
+      color: #fff;
+      border-color: var(--border-brown);
+    }
+
+    /* 連線狀態徽章 */
+    .sync-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 2px solid var(--border-brown);
+      background: var(--sky-soft);
+      color: #1b4f72;
+    }
+
+    .sync-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #27ae60;
+      display: inline-block;
+    }
+
+    .sync-dot.offline {
+      background: #e67e22;
+    }
+
+    /* 浮動提示框與彩帶 */
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--forest);
+      color: #fff;
+      border: 3px solid var(--border-brown);
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow-solid);
+      z-index: 100;
+      transition: transform 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .confetti-piece {
+      position: fixed;
+      top: -16px;
+      width: 10px;
+      height: 14px;
+      border-radius: 3px;
+      z-index: 99;
+      pointer-events: none;
+      animation: fall 2.8s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(540deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 頂部懸浮標題與計時列 -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-icon">🔍</div>
+        <div>
+          <div class="brand-title">摩爾來找碴｜拯救莊園生活大百科</div>
+          <div class="brand-sub">國小四年級英文單字解謎冒險</div>
+        </div>
+      </div>
+
+      <div class="timer-pill">
+        <span id="timer-label" class="timer-label">⏱️ 任務倒數</span>
+        <span id="timer-display" class="timer-digits">90:00</span>
+        <button id="btn-timer-toggle" class="btn btn-sm btn-forest" onclick="toggleTimer()">▶️ 開始</button>
+        <button class="btn btn-sm btn-paper" onclick="resetTimer()">🔄 重設</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 1. 緊急任務故事橫幅 -->
+    <section class="story-hero">
+      <div>
+        <span class="badge-pill badge-berry">🚨 莊園印刷廠緊急求救</span>
+        <h1 class="story-title">打敗搗蛋鬼庫拉，救回《莊園生活大百科》！</h1>
+        <p class="story-text">
+          調皮的<strong>庫拉</strong>昨晚潛入印刷廠，把《莊園生活大百科》裡的插畫招牌、菜單拼字和日記全部改亂了！
+          小摩爾偵探們，快用你們的英文超能力找出「圖文不符」與「拼寫矛盾」的碴，收集 <strong>4 片啟動拼圖</strong>拯救大百科吧！
+        </p>
+      </div>
+
+      <div class="rules-box">
+        <h3>⭐ 小偵探破關集星秘訣</h3>
+        <div class="rule-item">
+          <span>1. 登錄本機小隊（選顏色＋隊名鎖定）</span>
+          <span class="rule-pts">準備出發</span>
+        </div>
+        <div class="rule-item">
+          <span>2. 轉動抽籤機或依序破解 4 大關卡</span>
+          <span class="rule-pts">每關 +1 ⭐</span>
+        </div>
+        <div class="rule-item">
+          <span>3. 集齊 4 個密碼字母啟動印刷機</span>
+          <span class="rule-pts">終極通關</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1.5 隨機抽籤進入關卡機 + 小隊登錄鎖定（唯一抽籤機） -->
+    <section class="lottery-panel">
+      <div style="display:flex;flex-direction:column;justify-content:space-between;gap:12px;">
+        <div>
+          <span class="badge-pill badge-forest">🎰 隨機任務抽籤機 • 40 題大題庫</span>
+          <h2 style="font-size:1.3rem;font-weight:900;color:var(--forest);margin-top:6px;">轉動摩爾抽籤機，隨機抽取挑戰題組！</h2>
+          <p style="font-size:0.88rem;color:var(--ink-muted);font-weight:700;margin-top:2px;">
+            四大關卡各有 <strong>10 組不同題目</strong>！點擊按鈕即可隨機抽出「關卡＋第 1~10 號題組」並進入！
+          </p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
+          <div class="lottery-display">
+            <div id="lottery-reel" class="lottery-reel">?</div>
+            <div>
+              <div id="lottery-stage-txt" style="font-size:0.8rem;font-weight:900;color:var(--amber);">準備抽籤...</div>
+              <div id="lottery-title-txt" style="font-size:0.96rem;font-weight:900;color:var(--forest);">點擊按鈕抽取題組</div>
+            </div>
+          </div>
+          <button id="btn-draw-all" class="btn btn-berry" style="font-size:1rem;padding:12px 18px;" onclick="drawRandomMission()">
+            🎲 隨機抽一題挑戰！
+          </button>
+        </div>
+      </div>
+
+      <!-- 右手邊：小隊名稱與代表顏色登錄（送出後鎖定不可重來） -->
+      <div class="team-setup-box">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <span style="font-size:0.95rem;font-weight:900;color:var(--forest);">🛡️ 登錄本機小隊（確認後不可更改）</span>
+          <span id="team-lock-badge" class="badge-pill badge-amber" style="white-space:nowrap;">尚未鎖定</span>
+        </div>
+
+        <div>
+          <div style="font-size:0.8rem;font-weight:800;color:var(--ink-muted);margin-bottom:4px;">1. 選擇代表顏色：</div>
+          <div class="color-choices" id="color-choices">
+            <button type="button" class="color-opt selected" data-id="1" onclick="selectSetupColor(1)">🔴 紅隊</button>
+            <button type="button" class="color-opt" data-id="2" onclick="selectSetupColor(2)">🔵 藍隊</button>
+            <button type="button" class="color-opt" data-id="3" onclick="selectSetupColor(3)">🟢 綠隊</button>
+            <button type="button" class="color-opt" data-id="4" onclick="selectSetupColor(4)">🟡 黃隊</button>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="setup-team-name" class="team-name-input" type="text" maxlength="12" placeholder="2. 輸入你們的隊伍名稱..." />
+          <button id="btn-lock-team" class="btn btn-forest" style="white-space:nowrap;" onclick="lockMyTeam()">🔒 確認鎖定</button>
+        </div>
+        <div id="setup-hint" style="font-size:0.78rem;font-weight:800;color:var(--berry);">
+          ⚠️ 請先選好顏色並輸入隊名按「確認鎖定」，鎖定後答對題目才會自動加星星喔！
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 四大偵探解謎關卡區 -->
+    <section>
+      <div class="section-header">
+        <div>
+          <span class="badge-pill badge-amber">🕵️‍♀️ 小偵探闖關挑戰</span>
+          <h2 class="section-title" style="margin-top:6px;">四大偵探解謎關卡</h2>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <button class="btn btn-sm btn-olive" onclick="rerollCurrentStage()">🔄 本關換一題（1~10題庫）</button>
+          <button class="btn btn-sm btn-paper" onclick="setTimer(12, '⏱️ 單關解謎 (12分)')">⏱️ 切換單關 12 分鐘倒數</button>
+        </div>
+      </div>
+
+      <!-- 關卡切換按鈕列 -->
+      <div class="stage-tabs">
+        <button id="tab-1" class="stage-tab active" onclick="switchStage(1)">
+          <div class="stage-tab-top"><span>STAGE 01 • <strong id="tab-q-1">#1</strong></span><span id="status-1">🔒 未破關</span></div>
+          <div class="stage-tab-name">1. 失蹤的招牌</div>
+        </button>
+        <button id="tab-2" class="stage-tab" onclick="switchStage(2)">
+          <div class="stage-tab-top"><span>STAGE 02 • <strong id="tab-q-2">#1</strong></span><span id="status-2">🔒 未破關</span></div>
+          <div class="stage-tab-name">2. 亂碼分類清單</div>
+        </button>
+        <button id="tab-3" class="stage-tab" onclick="switchStage(3)">
+          <div class="stage-tab-top"><span>STAGE 03 • <strong id="tab-q-3">#1</strong></span><span id="status-3">🔒 未破關</span></div>
+          <div class="stage-tab-name">3. 矛盾的偵探日記</div>
+        </button>
+        <button id="tab-4" class="stage-tab" onclick="switchStage(4)">
+          <div class="stage-tab-top"><span>STAGE 04 • <strong id="tab-q-4">#1</strong></span><span id="status-4">🔒 未破關</span></div>
+          <div class="stage-tab-name">4. 修復大百科插畫</div>
+        </button>
+      </div>
+
+      <!-- 關卡互動內容框 -->
+      <div class="card-panel">
+
+        <!-- ==================== STAGE 1：失蹤的招牌 ==================== -->
+        <div id="panel-1" class="stage-panel active">
+          <div class="stage-head">
+            <span class="badge-pill badge-olive">👀 任務一：觀察力大考驗</span>
+            <h3>第 1 關｜失蹤的招牌（Missing Signs）<span id="s1-variant-tag" class="variant-pill">題組 #1 / 10</span></h3>
+            <p>莊園地圖上的建築招牌被調換了！請<strong>點擊選出 2 張圖文不符的卡片</strong>，並從按鈕改回正確的英文單字。</p>
+          </div>
+
+          <div class="signs-grid" id="s1-cards-grid"></div>
+
+          <div id="fb-1" class="feedback"></div>
+
+          <div class="stage-footer-bar">
+            <span style="font-size:0.86rem;font-weight:700;color:var(--ink-muted);">💡 提示：點擊「圖文不符」的卡片會出現紅框與純英文單字按鈕喔！</span>
+            <button class="btn btn-amber" onclick="checkStage1()">🔍 檢查第 1 關答案</button>
+          </div>
+        </div>
+
+        <!-- ==================== STAGE 2：庫拉的亂碼分類清單 ==================== -->
+        <div id="panel-2" class="stage-panel">
+          <div class="stage-head">
+            <span class="badge-pill badge-olive">🪄 任務二：拼字魔法師</span>
+            <h3>第 2 關｜庫拉的亂碼分類清單 <span id="s2-variant-tag" class="variant-pill">題組 #1 / 10</span></h3>
+            <p id="s2-desc">清單上的單字拼錯了！請先在空格<strong>輸入正確拼字</strong>，再點擊按鈕分類到正確欄位。</p>
+          </div>
+
+          <div class="menu-workspace">
+            <div class="scramble-list" id="scramble-list"></div>
+
+            <!-- 即時分類預覽板 -->
+            <div class="live-menu-board">
+              <div id="s2-board-title" class="live-menu-title">🍴 摩爾莊園 • 今日分類清單預覽</div>
+              <div class="menu-columns">
+                <div class="menu-col">
+                  <h4 id="s2-catA-title">🍽️ Food（食物區）</h4>
+                  <div id="menu-food-list"></div>
+                </div>
+                <div class="menu-col">
+                  <h4 id="s2-catB-title">🥤 Drinks（飲料區）</h4>
+                  <div id="menu-drink-list"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="fb-2" class="feedback"></div>
+
+          <div class="stage-footer-bar">
+            <span style="font-size:0.86rem;font-weight:700;color:var(--ink-muted);">💡 提示：仔細檢查母音順序與多出來的字母，拼對後別忘了按右邊的分類按鈕！</span>
+            <button class="btn btn-amber" onclick="checkStage2()">🔍 檢查第 2 關答案</button>
+          </div>
+        </div>
+
+        <!-- ==================== STAGE 3：矛盾的偵探日記 ==================== -->
+        <div id="panel-3" class="stage-panel">
+          <div class="stage-head">
+            <span class="badge-pill badge-olive">🧠 任務三：邏輯小神探</span>
+            <h3>第 3 關｜矛盾的偵探日記（Contradictory Diary）<span id="s3-variant-tag" class="variant-pill">題組 #1 / 10</span></h3>
+            <p>庫拉的日記裡藏了兩個「前後矛盾」的單字！請<strong>點擊日記裡發亮的單字</strong>，幫它換成合理的好單字。</p>
+          </div>
+
+          <div id="diary-paper" class="diary-paper"></div>
+
+          <div id="diary-picker" class="diary-editor-box">
+            <div id="diary-picker-title" style="font-weight:900;color:var(--forest);font-size:0.95rem;"></div>
+            <div id="diary-picker-choices" class="choice-pills"></div>
+          </div>
+
+          <div id="fb-3" class="feedback"></div>
+
+          <div class="stage-footer-bar">
+            <span style="font-size:0.86rem;font-weight:700;color:var(--ink-muted);">💡 提示：把兩個發亮的黃底單字都點開，換成符合前後文邏輯的英文單字！</span>
+            <button class="btn btn-amber" onclick="checkStage3()">🔍 檢查第 3 關答案</button>
+          </div>
+        </div>
+
+        <!-- ==================== STAGE 4：修復大百科插畫 ==================== -->
+        <div id="panel-4" class="stage-panel">
+          <div class="stage-head">
+            <span class="badge-pill badge-olive">🎨 任務四：小小插畫家</span>
+            <h3>第 4 關｜修復大百科插畫（Restore the Encyclopedia）<span id="s4-variant-tag" class="variant-pill">題組 #1 / 10</span></h3>
+            <p>① 先在左側<strong>點選不合理的一句話</strong>並修正單字；② 在右側畫板上畫出正確場景，全組大聲唸出三句話！</p>
+          </div>
+
+          <div class="stage4-grid">
+            <!-- 左側句子檢核 -->
+            <div id="s4-sentences-box"></div>
+
+            <!-- 右側互動繪圖板 -->
+            <div class="canvas-box">
+              <div class="canvas-toolbar">
+                <div class="swatch-group" id="swatch-group"></div>
+                <button class="btn btn-sm btn-paper" onclick="clearCanvas()">🧹 清除重畫</button>
+              </div>
+              <canvas id="art-canvas"></canvas>
+            </div>
+          </div>
+
+          <div id="fb-4" class="feedback"></div>
+
+          <div class="stage-footer-bar">
+            <span style="font-size:0.86rem;font-weight:700;color:var(--ink-muted);">💡 提示：找出最不合理的那一句並改對單字，就能領取最後一片拼圖！</span>
+            <button class="btn btn-amber" onclick="checkStage4()">🔍 檢查第 4 關答案</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. 印刷機啟動密碼與四色小隊計分板 -->
+    <section class="vault-score-grid">
+      <!-- 最終密碼鎖 -->
+      <div class="card-panel">
+        <span class="badge-pill badge-amber">🔐 終極解鎖任務</span>
+        <h2 class="section-title" style="margin-top:6px;">印刷機啟動密碼</h2>
+        <p style="font-size:0.9rem;color:var(--ink-muted);font-weight:700;margin-top:4px;">
+          每破一關就能解鎖一片拼圖背面的神秘字母！集齊 4 個字母並輸入密碼，啟動印刷機拯救大百科：
+        </p>
+
+        <div class="puzzle-slots">
+          <div id="slot-1" class="puzzle-slot">
+            <div style="font-size:0.75rem;font-weight:800;">拼圖 1</div>
+            <div id="letter-1" class="puzzle-letter">?</div>
+          </div>
+          <div id="slot-2" class="puzzle-slot">
+            <div style="font-size:0.75rem;font-weight:800;">拼圖 2</div>
+            <div id="letter-2" class="puzzle-letter">?</div>
+          </div>
+          <div id="slot-3" class="puzzle-slot">
+            <div style="font-size:0.75rem;font-weight:800;">拼圖 3</div>
+            <div id="letter-3" class="puzzle-letter">?</div>
+          </div>
+          <div id="slot-4" class="puzzle-slot">
+            <div style="font-size:0.75rem;font-weight:800;">拼圖 4</div>
+            <div id="letter-4" class="puzzle-letter">?</div>
+          </div>
+        </div>
+
+        <div class="passcode-row">
+          <input id="passcode-input" class="passcode-input" type="text" maxlength="4" placeholder="XXXX"
+            onkeydown="if(event.key==='Enter') unlockPrintingPress()" />
+          <button class="btn btn-forest" onclick="unlockPrintingPress()">🚀 啟動印刷機</button>
+          <button id="btn-reopen-cert" class="btn btn-amber" style="display:none;" onclick="openCertificateModal()">🏅 查看榮譽證書</button>
+        </div>
+
+        <div id="fb-vault" class="feedback"></div>
+      </div>
+
+      <!-- 四色小隊計分板（僅供顯示同步星星，不可點擊切換或修改） -->
+      <div class="card-panel">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span class="badge-pill badge-olive">🏆 偵探小隊即時星星榜</span>
+              <span id="sync-status-badge" class="sync-badge"><span id="sync-dot" class="sync-dot offline"></span><span id="sync-text">連線準備中...</span></span>
+            </div>
+            <h2 class="section-title" style="margin-top:6px;">全班小隊同步星星榜</h2>
+          </div>
+          <button class="btn btn-sm btn-paper" onclick="openResetModal()">🔐 全班星星歸零</button>
+        </div>
+        <p style="font-size:0.86rem;color:var(--ink-muted);font-weight:700;margin-top:4px;">
+          ✨ 此區僅供即時查看全班各隊星星數；答對題目時系統會自動為你們登錄的小隊加星星！
+        </p>
+
+        <div class="teams-grid" id="teams-grid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 教師密碼歸零確認彈窗 -->
+  <div id="reset-modal" class="modal-backdrop" onclick="closeResetModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div style="font-size:2rem;margin-bottom:6px;">🔐</div>
+      <h3 style="font-size:1.15rem;font-weight:900;color:var(--forest);">教師管理驗證</h3>
+      <p style="font-size:0.86rem;color:var(--ink-muted);font-weight:700;margin:6px 0 12px;">
+        請輸入管理密碼以將全班所有小隊星星歸零：
+      </p>
+      <input id="reset-pwd-input" class="passcode-input" type="password" maxlength="8" placeholder="••••"
+        onkeydown="if(event.key==='Enter') confirmResetScores()" />
+      <div id="reset-pwd-err" style="font-size:0.82rem;font-weight:800;color:var(--berry);margin-top:8px;min-height:20px;"></div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;">
+        <button class="btn btn-paper" onclick="closeResetModal()">取消</button>
+        <button class="btn btn-berry" onclick="confirmResetScores()">確認歸零</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 摩爾莊園首席偵探榮譽證書彈窗 -->
+  <div id="cert-modal" class="modal-backdrop" onclick="closeCertificateModal()">
+    <div class="cert-modal-card" onclick="event.stopPropagation()">
+      <div class="cert-inner-border">
+        <div class="cert-ribbon">MOLE MANOR DETECTIVE AGENCY</div>
+        <div style="font-size:2.4rem;line-height:1.1;margin:4px 0;">🏅📖✨</div>
+        <h2 class="cert-heading">摩爾莊園「首席小偵探」榮譽證書</h2>
+        <p style="font-size:0.94rem;color:var(--ink-muted);font-weight:700;">
+          茲表揚以下偵探小隊成功破解搗蛋鬼庫拉的謎題，啟動印刷機救回《莊園生活大百科》：
+        </p>
+
+        <div class="cert-team-banner">
+          <span id="cert-team-icon">🕵️</span>
+          <span id="cert-team-name">摩爾神探小隊</span>
+          <span id="cert-team-stars" style="color:var(--berry);font-family:var(--font-en);font-size:1.15rem;"></span>
+        </div>
+
+        <p style="font-size:0.95rem;color:var(--ink-brown);font-weight:800;line-height:1.7;margin:6px 0 14px;">
+          你們在任務中展現了超強的<span style="color:var(--forest);">英文單字觀察力、拼字魔法與團隊合作精神</span>！<br/>
+          特頒發此證書，鼓勵你們繼續快樂學英文！
+        </p>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 14px 0;border-top:2px dashed rgba(74,55,35,0.25);">
+          <div style="text-align:left;font-size:0.84rem;font-weight:800;color:var(--ink-muted);">
+            <div>頒發單位：摩爾莊園大百科編輯部</div>
+            <div id="cert-date">日期：今日任務達成</div>
+          </div>
+          <div class="cert-stamp">
+            <span>任務成功</span>
+            <span style="font-family:var(--font-en);font-size:0.88rem;">GREAT JOB!</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-print" style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;">
+        <button class="btn btn-amber" onclick="downloadCertificatePNG()">📥 下載證書圖檔 (PNG)</button>
+        <button class="btn btn-paper" onclick="window.print()">🖨️ 列印</button>
+        <button class="btn btn-forest" onclick="closeCertificateModal()">👍 太棒了，收下證書</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    let db = null;
+    let auth = null;
+    let currentUser = null;
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'mole-spot-difference-g4';
+
+    async function initCloudSync() {
+      const badgeText = document.getElementById('sync-text');
+      const badgeDot = document.getElementById('sync-dot');
+      try {
+        if (typeof __firebase_config === 'undefined' || !__firebase_config) {
+          throw new Error('No cloud config');
+        }
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+        currentUser = auth.currentUser;
+
+        if (!currentUser) return;
+
+        const teamsCol = collection(db, 'artifacts', appId, 'public', 'data', 'mole_teams');
+        onSnapshot(
+          teamsCol,
+          (snapshot) => {
+            if (badgeText) badgeText.textContent = '🟢 四台電腦即時連線同步中';
+            if (badgeDot) badgeDot.classList.remove('offline');
+
+            if (snapshot.empty) {
+              // 若雲端尚未建立初始四隊資料，寫入預設值
+              window.teams.forEach(t => {
+                window.syncTeamToCloud(t);
+              });
+              return;
+            }
+
+            let updated = false;
+            snapshot.forEach((docSnap) => {
+              const data = docSnap.data();
+              const teamId = Number(docSnap.id.replace('team_', ''));
+              const localTeam = window.teams.find(item => item.id === teamId);
+              if (localTeam && data) {
+                if (typeof data.name === 'string') {
+                  localTeam.name = data.name;
+                }
+                if (typeof data.score === 'number') {
+                  localTeam.score = data.score;
+                }
+                updated = true;
+              }
+            });
+            if (updated && typeof window.renderScoreboard === 'function') {
+              window.renderScoreboard();
+            }
+          },
+          (err) => {
+            console.error('Sync snapshot error:', err);
+            if (badgeText) badgeText.textContent = '🟠 單機備援模式';
+            if (badgeDot) badgeDot.classList.add('offline');
+          }
+        );
+      } catch (err) {
+        if (badgeText) badgeText.textContent = '🟠 單機備援模式';
+        if (badgeDot) badgeDot.classList.add('offline');
+      }
+    }
+
+    window.syncTeamToCloud = async function (team) {
+      if (!db || !currentUser) return;
+      try {
+        const teamRef = doc(db, 'artifacts', appId, 'public', 'data', 'mole_teams', `team_${team.id}`);
+        await setDoc(teamRef, {
+          id: team.id,
+          icon: team.icon,
+          name: team.name,
+          score: team.score,
+          updatedAt: Date.now()
+        });
+      } catch (e) {
+        console.error('Failed to sync team:', e);
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initCloudSync();
+    });
+  </script>
+
+  <script>
+    // ==================== 音效與提示工具 ====================
+    let audioCtx = null;
+    function playTone(typeOrFreq = 'click', wave = 'sine', dur = 0.14) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (typeof typeOrFreq === 'number') {
+          osc.type = wave;
+          osc.frequency.setValueAtTime(typeOrFreq, now);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+          osc.start(now);
+          osc.stop(now + dur);
+        } else if (typeOrFreq === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.09);
+          osc.frequency.setValueAtTime(783.99, now + 0.18);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
+          osc.start(now);
+          osc.stop(now + 0.42);
+        } else if (typeOrFreq === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.setValueAtTime(175, now + 0.12);
+          gain.gain.setValueAtTime(0.09, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(580, now);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+          osc.start(now);
+          osc.stop(now + 0.09);
+        }
+      } catch (e) {}
+    }
+
+    let toastTimer = null;
+    function showToast(msg, type = 'info') {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.style.background = type === 'success' ? '#244b35' : type === 'error' ? '#c94a38' : '#3b2d1f';
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+    }
+
+    function launchConfetti() {
+      const colors = ['#e68a2e', '#c94a38', '#4c8c5c', '#f1c40f', '#3498db'];
+      for (let i = 0; i < 36; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.background = colors[i % colors.length];
+        piece.style.animationDuration = (1.8 + Math.random() * 1.2) + 's';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 2900);
+      }
+    }
+
+    // ==================== 4 大關卡 × 10 組題庫（共 40 題） ====================
+    const svgArt = {
+      library: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fdf6e7"/><rect x="24" y="14" width="52" height="90" rx="4" fill="#8c5828" stroke="#4a3723" stroke-width="3"/><line x1="24" y1="44" x2="76" y2="44" stroke="#4a3723" stroke-width="3"/><line x1="24" y1="74" x2="76" y2="74" stroke="#4a3723" stroke-width="3"/><rect x="30" y="20" width="10" height="22" fill="#d94e34"/><rect x="42" y="18" width="11" height="24" fill="#2f6fb3"/><rect x="56" y="22" width="10" height="20" fill="#2d8653"/><circle cx="135" cy="48" r="22" fill="#6d5239" stroke="#4a3723" stroke-width="3"/><circle cx="135" cy="51" r="14" fill="#f3d2b3"/><circle cx="130" cy="47" r="2.2" fill="#222"/><circle cx="140" cy="47" r="2.2" fill="#222"/><ellipse cx="135" cy="53" rx="5" ry="3.5" fill="#f28c28"/><path d="M108 84 Q135 75 135 88 Q135 75 162 84 L158 106 Q135 98 135 109 Q135 98 112 106 Z" fill="#fff" stroke="#4a3723" stroke-width="3"/></svg>`,
+      zoo: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#eef9f1"/><rect x="0" y="88" width="200" height="32" fill="#76d79c"/><rect x="52" y="28" width="14" height="64" rx="6" fill="#f4d03f" stroke="#4a3723" stroke-width="3"/><ellipse cx="62" cy="24" rx="14" ry="9" fill="#f4d03f" stroke="#4a3723" stroke-width="3"/><circle cx="67" cy="22" r="2.2" fill="#222"/><circle cx="59" cy="46" r="3" fill="#b9770e"/><ellipse cx="132" cy="70" rx="26" ry="18" fill="#aeb6bf" stroke="#4a3723" stroke-width="3"/><path d="M108 68 Q90 72 94 90" fill="none" stroke="#4a3723" stroke-width="5" stroke-linecap="round"/><circle cx="116" cy="64" r="2.2" fill="#222"/></svg>`,
+      park: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#ebf5fb"/><rect x="0" y="88" width="200" height="32" fill="#58d68d"/><line x1="40" y1="32" x2="40" y2="90" stroke="#4a3723" stroke-width="4"/><line x1="52" y1="32" x2="52" y2="90" stroke="#4a3723" stroke-width="4"/><path d="M52 35 Q78 76 108 88" fill="none" stroke="#e67e22" stroke-width="7" stroke-linecap="round"/><line x1="130" y1="90" x2="152" y2="28" stroke="#c0392b" stroke-width="4"/><line x1="174" y1="90" x2="152" y2="28" stroke="#c0392b" stroke-width="4"/><line x1="152" y1="28" x2="152" y2="70" stroke="#4a3723" stroke-width="2.5"/><rect x="142" y="70" width="20" height="5" fill="#f1c40f" stroke="#4a3723" stroke-width="2"/></svg>`,
+      supermarket: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fef9e7"/><path d="M48 45 L62 45 L72 82 L138 82 L148 52 L65 52" fill="none" stroke="#4a3723" stroke-width="4" stroke-linejoin="round"/><circle cx="80" cy="94" r="7" fill="#4a3723"/><circle cx="130" cy="94" r="7" fill="#4a3723"/><circle cx="92" cy="46" r="10" fill="#e74c3c"/><circle cx="114" cy="44" r="11" fill="#f39c12"/><rect x="124" y="34" width="14" height="18" fill="#27ae60"/></svg>`,
+      hospital: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fdedec"/><rect x="55" y="22" width="90" height="82" rx="8" fill="#fff" stroke="#4a3723" stroke-width="3"/><rect x="93" y="34" width="14" height="36" fill="#e74c3c"/><rect x="82" y="45" width="36" height="14" fill="#e74c3c"/><rect x="88" y="80" width="24" height="24" fill="#aed6f1" stroke="#4a3723" stroke-width="2.5"/></svg>`,
+      school: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#eaf2f8"/><polygon points="100,16 42,48 158,48" fill="#d35400" stroke="#4a3723" stroke-width="3"/><rect x="52" y="48" width="96" height="56" fill="#f9e79f" stroke="#4a3723" stroke-width="3"/><circle cx="100" cy="36" r="8" fill="#fff" stroke="#4a3723" stroke-width="2"/><rect x="88" y="76" width="24" height="28" fill="#8c5828" stroke="#4a3723" stroke-width="2.5"/></svg>`,
+      sunny: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fef5e7"/><circle cx="100" cy="60" r="26" fill="#f1c40f" stroke="#e67e22" stroke-width="3"/><g stroke="#e67e22" stroke-width="4" stroke-linecap="round"><line x1="100" y1="16" x2="100" y2="26"/><line x1="100" y1="94" x2="100" y2="104"/><line x1="56" y1="60" x2="66" y2="60"/><line x1="134" y1="60" x2="144" y2="60"/><line x1="69" y1="29" x2="76" y2="36"/><line x1="124" y1="84" x2="131" y2="91"/><line x1="131" y1="29" x2="124" y2="36"/><line x1="76" y1="84" x2="69" y2="91"/></g></svg>`,
+      rainy: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#ebf5fb"/><path d="M62 64 A22 22 0 0 1 102 50 A26 26 0 0 1 146 66 Z" fill="#85929e" stroke="#4a3723" stroke-width="3"/><line x1="78" y1="76" x2="72" y2="94" stroke="#2980b9" stroke-width="3.5" stroke-linecap="round"/><line x1="102" y1="76" x2="96" y2="94" stroke="#2980b9" stroke-width="3.5" stroke-linecap="round"/><line x1="126" y1="76" x2="120" y2="94" stroke="#2980b9" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+      windy: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#eafaf1"/><path d="M40 46 Q95 46 115 36 A10 10 0 1 0 106 24" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/><path d="M35 66 Q115 66 140 56 A11 11 0 1 1 130 74" fill="none" stroke="#2ecc71" stroke-width="4" stroke-linecap="round"/><path d="M55 86 L125 86" fill="none" stroke="#58d68d" stroke-width="4" stroke-linecap="round"/></svg>`,
+      cloudy: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#f4f6f7"/><path d="M54 78 A24 24 0 0 1 98 60 A28 28 0 0 1 150 78 Z" fill="#fff" stroke="#5d6d7e" stroke-width="3.5"/></svg>`,
+      apple: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fdedec"/><circle cx="100" cy="66" r="30" fill="#e74c3c" stroke="#4a3723" stroke-width="3"/><path d="M100 36 Q104 20 112 18" fill="none" stroke="#4a3723" stroke-width="4"/><ellipse cx="114" cy="28" rx="12" ry="6" fill="#27ae60" stroke="#4a3723" stroke-width="2"/></svg>`,
+      banana: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fef9e7"/><path d="M58 34 Q68 96 144 82 Q102 74 72 30 Z" fill="#f1c40f" stroke="#4a3723" stroke-width="3"/></svg>`,
+      cake: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fdf2e9"/><rect x="56" y="54" width="88" height="42" rx="6" fill="#f5b7b1" stroke="#4a3723" stroke-width="3"/><rect x="96" y="32" width="8" height="22" fill="#f7dc6f" stroke="#4a3723" stroke-width="2"/><circle cx="100" cy="24" r="5" fill="#e67e22"/></svg>`,
+      hamburger: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fef5e7"/><path d="M56 56 A44 26 0 0 1 144 56 Z" fill="#e67e22" stroke="#4a3723" stroke-width="3"/><rect x="52" y="58" width="96" height="8" rx="4" fill="#27ae60"/><rect x="54" y="68" width="92" height="10" rx="4" fill="#6e2c00"/><rect x="56" y="80" width="88" height="12" rx="6" fill="#e67e22" stroke="#4a3723" stroke-width="3"/></svg>`,
+      dog: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fef9e7"/><ellipse cx="66" cy="52" rx="10" ry="22" fill="#8c5828" stroke="#4a3723" stroke-width="3"/><ellipse cx="134" cy="52" rx="10" ry="22" fill="#8c5828" stroke="#4a3723" stroke-width="3"/><circle cx="100" cy="62" r="28" fill="#d7995b" stroke="#4a3723" stroke-width="3"/><circle cx="90" cy="56" r="3" fill="#222"/><circle cx="110" cy="56" r="3" fill="#222"/><ellipse cx="100" cy="68" rx="6" ry="4" fill="#222"/></svg>`,
+      cat: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#f5eef8"/><polygon points="70,44 78,18 92,38" fill="#aeb6bf" stroke="#4a3723" stroke-width="3"/><polygon points="130,44 122,18 108,38" fill="#aeb6bf" stroke="#4a3723" stroke-width="3"/><circle cx="100" cy="64" r="28" fill="#d5d8dc" stroke="#4a3723" stroke-width="3"/><circle cx="90" cy="58" r="3" fill="#222"/><circle cx="110" cy="58" r="3" fill="#222"/><line x1="56" y1="64" x2="76" y2="66" stroke="#4a3723" stroke-width="2"/><line x1="124" y1="66" x2="144" y2="64" stroke="#4a3723" stroke-width="2"/></svg>`,
+      bird: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#ebf5fb"/><ellipse cx="100" cy="64" rx="28" ry="20" fill="#5dade2" stroke="#4a3723" stroke-width="3"/><polygon points="128,60 144,64 128,69" fill="#f39c12" stroke="#4a3723" stroke-width="2"/><circle cx="114" cy="58" r="3" fill="#222"/></svg>`,
+      fish: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#e8f8f5"/><ellipse cx="94" cy="62" rx="34" ry="20" fill="#f39c12" stroke="#4a3723" stroke-width="3"/><polygon points="128,62 152,44 152,80" fill="#e67e22" stroke="#4a3723" stroke-width="3"/><circle cx="76" cy="58" r="3" fill="#222"/></svg>`,
+      read: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fdf6e7"/><path d="M52 36 Q100 24 100 42 Q100 24 148 36 L142 92 Q100 80 100 96 Q100 80 58 92 Z" fill="#fff" stroke="#4a3723" stroke-width="3"/><line x1="100" y1="42" x2="100" y2="96" stroke="#4a3723" stroke-width="2.5"/></svg>`,
+      sleep: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#eaf2f8"/><rect x="44" y="64" width="112" height="28" rx="6" fill="#5dade2" stroke="#4a3723" stroke-width="3"/><rect x="52" y="52" width="28" height="14" rx="5" fill="#fff" stroke="#4a3723" stroke-width="2.5"/><text x="122" y="42" font-size="18" font-weight="900" fill="#2980b9">Zzz</text></svg>`,
+      swim: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#d6eaf8"/><circle cx="88" cy="54" r="14" fill="#f5cba7" stroke="#4a3723" stroke-width="3"/><path d="M30 74 Q55 64 80 74 T130 74 T175 74" fill="none" stroke="#2980b9" stroke-width="4"/><path d="M30 90 Q55 80 80 90 T130 90 T175 90" fill="none" stroke="#3498db" stroke-width="4"/></svg>`,
+      run: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fef9e7"/><circle cx="104" cy="30" r="11" fill="#f5cba7" stroke="#4a3723" stroke-width="3"/><path d="M100 42 L88 68 L66 86 M88 68 L114 82 L126 98 M96 50 L122 56 M96 50 L74 60" fill="none" stroke="#e74c3c" stroke-width="5" stroke-linecap="round"/></svg>`,
+      car: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#ebf5fb"/><path d="M56 64 L72 42 L128 42 L144 64 Z" fill="#3498db" stroke="#4a3723" stroke-width="3"/><rect x="42" y="64" width="116" height="24" rx="8" fill="#2980b9" stroke="#4a3723" stroke-width="3"/><circle cx="68" cy="90" r="11" fill="#2c3e50"/><circle cx="132" cy="90" r="11" fill="#2c3e50"/></svg>`,
+      bus: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#fef9e7"/><rect x="36" y="34" width="128" height="54" rx="10" fill="#f1c40f" stroke="#4a3723" stroke-width="3"/><rect x="48" y="44" width="24" height="18" fill="#aed6f1" stroke="#4a3723" stroke-width="2"/><rect x="82" y="44" width="24" height="18" fill="#aed6f1" stroke="#4a3723" stroke-width="2"/><rect x="116" y="44" width="24" height="18" fill="#aed6f1" stroke="#4a3723" stroke-width="2"/><circle cx="66" cy="90" r="10" fill="#2c3e50"/><circle cx="134" cy="90" r="10" fill="#2c3e50"/></svg>`,
+      bike: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#eafaf1"/><circle cx="64" cy="80" r="18" fill="none" stroke="#4a3723" stroke-width="4"/><circle cx="136" cy="80" r="18" fill="none" stroke="#4a3723" stroke-width="4"/><path d="M64 80 L94 54 L126 54 L136 80 M94 54 L102 80 L64 80" fill="none" stroke="#e74c3c" stroke-width="4"/></svg>`,
+      train: `<svg viewBox="0 0 200 120" width="100%" height="120"><rect width="200" height="120" fill="#f4f6f7"/><rect x="44" y="38" width="112" height="46" rx="8" fill="#27ae60" stroke="#4a3723" stroke-width="3"/><rect x="56" y="48" width="26" height="18" fill="#fff"/><rect x="92" y="48" width="26" height="18" fill="#fff"/><circle cx="68" cy="88" r="9" fill="#2c3e50"/><circle cx="100" cy="88" r="9" fill="#2c3e50"/><circle cx="132" cy="88" r="9" fill="#2c3e50"/></svg>`
+    };
+
+    // 第 1 關 10 組題庫
+    const stage1Bank = [
+      { cards: [{ art: 'library', shown: 'supermarket', correct: 'library' }, { art: 'zoo', shown: 'zoo', correct: 'zoo' }, { art: 'park', shown: 'hospital', correct: 'park' }], choices: ['library', 'park', 'supermarket', 'hospital', 'zoo'] },
+      { cards: [{ art: 'school', shown: 'zoo', correct: 'school' }, { art: 'hospital', shown: 'hospital', correct: 'hospital' }, { art: 'supermarket', shown: 'library', correct: 'supermarket' }], choices: ['school', 'supermarket', 'hospital', 'library', 'zoo'] },
+      { cards: [{ art: 'sunny', shown: 'rainy', correct: 'sunny' }, { art: 'windy', shown: 'windy', correct: 'windy' }, { art: 'rainy', shown: 'cloudy', correct: 'rainy' }], choices: ['sunny', 'rainy', 'windy', 'cloudy', 'snowy'] },
+      { cards: [{ art: 'cloudy', shown: 'sunny', correct: 'cloudy' }, { art: 'rainy', shown: 'rainy', correct: 'rainy' }, { art: 'windy', shown: 'sunny', correct: 'windy' }], choices: ['cloudy', 'windy', 'sunny', 'rainy', 'hot'] },
+      { cards: [{ art: 'apple', shown: 'banana', correct: 'apple' }, { art: 'cake', shown: 'cake', correct: 'cake' }, { art: 'hamburger', shown: 'apple', correct: 'hamburger' }], choices: ['apple', 'hamburger', 'banana', 'cake', 'rice'] },
+      { cards: [{ art: 'banana', shown: 'cake', correct: 'banana' }, { art: 'apple', shown: 'apple', correct: 'apple' }, { art: 'cake', shown: 'hamburger', correct: 'cake' }], choices: ['banana', 'cake', 'apple', 'hamburger', 'milk'] },
+      { cards: [{ art: 'dog', shown: 'cat', correct: 'dog' }, { art: 'bird', shown: 'bird', correct: 'bird' }, { art: 'fish', shown: 'dog', correct: 'fish' }], choices: ['dog', 'fish', 'cat', 'bird', 'lion'] },
+      { cards: [{ art: 'cat', shown: 'fish', correct: 'cat' }, { art: 'dog', shown: 'dog', correct: 'dog' }, { art: 'bird', shown: 'cat', correct: 'bird' }], choices: ['cat', 'bird', 'dog', 'fish', 'tiger'] },
+      { cards: [{ art: 'read', shown: 'swim', correct: 'read' }, { art: 'sleep', shown: 'sleep', correct: 'sleep' }, { art: 'run', shown: 'read', correct: 'run' }], choices: ['read', 'run', 'swim', 'sleep', 'jump'] },
+      { cards: [{ art: 'car', shown: 'bus', correct: 'car' }, { art: 'bike', shown: 'bike', correct: 'bike' }, { art: 'train', shown: 'car', correct: 'train' }], choices: ['car', 'train', 'bus', 'bike', 'boat'] }
+    ];
+
+    // 第 2 關 10 組題庫
+    const stage2Bank = [
+      { title: '🍴 摩爾莊園餐廳 • 食物與飲料分類', catA: '🍽️ Food（食物區）', catB: '🥤 Drinks（飲料區）', items: [{ wrong: 'nooodles', correct: 'noodles', cat: 'A' }, { wrong: 'jucie', correct: 'juice', cat: 'B' }, { wrong: 'rikce', correct: 'rice', cat: 'A' }, { wrong: 'mlik', correct: 'milk', cat: 'B' }] },
+      { title: '🐾 莊園生態園 • 陸上與水中動物', catA: '🦁 Land（陸上動物）', catB: '🐠 Water（水中動物）', items: [{ wrong: 'tiiger', correct: 'tiger', cat: 'A' }, { wrong: 'fihs', correct: 'fish', cat: 'B' }, { wrong: 'liion', correct: 'lion', cat: 'A' }, { wrong: 'whlae', correct: 'whale', cat: 'B' }] },
+      { title: '🎒 開學書包檢查 • 文具與穿著物品', catA: '✏️ School（文具類）', catB: '👕 Clothes（穿著類）', items: [{ wrong: 'pencill', correct: 'pencil', cat: 'A' }, { wrong: 'shrit', correct: 'shirt', cat: 'B' }, { wrong: 'rulre', correct: 'ruler', cat: 'A' }, { wrong: 'shose', correct: 'shoes', cat: 'B' }] },
+      { title: '🏡 摩爾新家設計 • 房間與家具分類', catA: '🏠 Rooms（房間）', catB: '🪑 Furniture（家具）', items: [{ wrong: 'kitchne', correct: 'kitchen', cat: 'A' }, { wrong: 'chari', correct: 'chair', cat: 'B' }, { wrong: 'bedrom', correct: 'bedroom', cat: 'A' }, { wrong: 'tabel', correct: 'table', cat: 'B' }] },
+      { title: '🏃 莊園運動會 • 運動與數字單字', catA: '⚽ Sports（運動）', catB: '🔢 Numbers（數字）', items: [{ wrong: 'swimm', correct: 'swim', cat: 'A' }, { wrong: 'twelwe', correct: 'twelve', cat: 'B' }, { wrong: 'dancce', correct: 'dance', cat: 'A' }, { wrong: 'fiften', correct: 'fifteen', cat: 'B' }] },
+      { title: '📅 時光日曆修復 • 星期與四季分類', catA: '📆 Days（星期）', catB: '🌸 Seasons（四季）', items: [{ wrong: 'Modnay', correct: 'monday', cat: 'A' }, { wrong: 'sumer', correct: 'summer', cat: 'B' }, { wrong: 'Frdiay', correct: 'friday', cat: 'A' }, { wrong: 'wintar', correct: 'winter', cat: 'B' }] },
+      { title: '🚗 交通工具總動員 • 陸地與天空交通', catA: '🚌 Road（陸地）', catB: '✈️ Sky（天空）', items: [{ wrong: 'trani', correct: 'train', cat: 'A' }, { wrong: 'palne', correct: 'plane', cat: 'B' }, { wrong: 'buss', correct: 'bus', cat: 'A' }, { wrong: 'rocekt', correct: 'rocket', cat: 'B' }] },
+      { title: '🎨 彩虹調色盤 • 顏色與形狀分類', catA: '🌈 Colors（顏色）', catB: '🔺 Shapes（形狀）', items: [{ wrong: 'yellwo', correct: 'yellow', cat: 'A' }, { wrong: 'cirle', correct: 'circle', cat: 'B' }, { wrong: 'purpel', correct: 'purple', cat: 'A' }, { wrong: 'sqaure', correct: 'square', cat: 'B' }] },
+      { title: '🍎 快樂野餐籃 • 水果與點心分類', catA: '🍓 Fruits（水果）', catB: '🍰 Snacks（點心）', items: [{ wrong: 'appel', correct: 'apple', cat: 'A' }, { wrong: 'caek', correct: 'cake', cat: 'B' }, { wrong: 'bannana', correct: 'banana', cat: 'A' }, { wrong: 'cookei', correct: 'cookie', cat: 'B' }] },
+      { title: '👨‍👩‍👧‍👦 摩爾家族聚會 • 家人與身體部位', catA: '❤️ Family（家人）', catB: '👀 Body（身體）', items: [{ wrong: 'mothre', correct: 'mother', cat: 'A' }, { wrong: 'mouthe', correct: 'mouth', cat: 'B' }, { wrong: 'sistir', correct: 'sister', cat: 'A' }, { wrong: 'hnads', correct: 'hands', cat: 'B' }] }
+    ];
+
+    // 第 3 關 10 組題庫
+    const stage3Bank = [
+      {
+        template: `"Today is a <strong>sunny</strong> day. It is very <strong>hot</strong>! I go outside with my {0} and sunglasses. I am very <strong>thirsty</strong>, so I have some {1}."`,
+        slots: [
+          { wrong: 'coat', prompt: '🌞 大熱天（sunny & hot）出門不會穿厚外套（coat），要換成哪一個？', options: ['coat', 'hat', 'cap'], valid: ['hat', 'cap'] },
+          { wrong: 'bread', prompt: '🥤 非常口渴（very thirsty）應該喝飲料而不是吃麵包（bread），要換成哪一個？', options: ['bread', 'water', 'juice'], valid: ['water', 'juice'] }
+        ]
+      },
+      {
+        template: `"It is a <strong>rainy</strong> day! I take my {0} to school. At noon, I am very <strong>hungry</strong>, so I eat some {1}."`,
+        slots: [
+          { wrong: 'sunglasses', prompt: '☔ 下雨天（rainy day）出門不會戴太陽眼鏡（sunglasses），要換成哪一個？', options: ['sunglasses', 'umbrella', 'raincoat'], valid: ['umbrella', 'raincoat'] },
+          { wrong: 'milk', prompt: '🍔 肚子很餓（hungry）應該吃食物而不是喝牛奶（milk），要換成哪一個？', options: ['milk', 'noodles', 'rice'], valid: ['noodles', 'rice'] }
+        ]
+      },
+      {
+        template: `"It is <strong>winter</strong> and very <strong>cold</strong>! I wear my warm {0}. In the afternoon, I go to the {1} to read books."`,
+        slots: [
+          { wrong: 'shorts', prompt: '❄️ 冬天很冷（cold）不會穿短褲（shorts），要換成哪一個？', options: ['shorts', 'coat', 'jacket'], valid: ['coat', 'jacket'] },
+          { wrong: 'zoo', prompt: '📚 想安靜看書（read books）應該去哪裡，而不是動物園（zoo）？', options: ['zoo', 'library', 'bookstore'], valid: ['library', 'bookstore'] }
+        ]
+      },
+      {
+        template: `"It is 10:00 at <strong>night</strong>. I am very <strong>sleepy</strong>, so I go to the {0} to sleep. Before bed, I brush my {1}."`,
+        slots: [
+          { wrong: 'kitchen', prompt: '🛏️ 想睡覺（sleep）應該去哪個房間，而不是廚房（kitchen）？', options: ['kitchen', 'bedroom', 'living room'], valid: ['bedroom'] },
+          { wrong: 'shoes', prompt: '🪥 睡前刷牙（brush my...）應該刷什麼，而不是鞋子（shoes）？', options: ['shoes', 'teeth', 'hair'], valid: ['teeth'] }
+        ]
+      },
+      {
+        template: `"Today is <strong>Sunday</strong>. We go to the {0} to see cute <strong>elephants</strong> and <strong>lions</strong>. Look! A big {1} is swimming in the water."`,
+        slots: [
+          { wrong: 'hospital', prompt: '🐘 想看大象和獅子應該去哪裡，而不是醫院（hospital）？', options: ['hospital', 'zoo', 'park'], valid: ['zoo'] },
+          { wrong: 'bird', prompt: '🌊 在水裡游泳（swimming in the water）的動物是哪一個？', options: ['bird', 'fish', 'turtle'], valid: ['fish', 'turtle'] }
+        ]
+      },
+      {
+        template: `"Mom is in the {0}. She is cooking <strong>dinner</strong> for us. Dad is in the yard. He is washing his new {1}."`,
+        slots: [
+          { wrong: 'bathroom', prompt: '🍳 媽媽正在煮晚餐（cooking dinner），應該在哪個房間？', options: ['bathroom', 'kitchen', 'bedroom'], valid: ['kitchen'] },
+          { wrong: 'pencil', prompt: '🚗 爸爸在院子裡洗（washing）他的新什麼？', options: ['pencil', 'car', 'bike'], valid: ['car', 'bike'] }
+        ]
+      },
+      {
+        template: `"I am sick and have a <strong>fever</strong>. My mom takes me to the {0}. The kind {1} gives me some medicine."`,
+        slots: [
+          { wrong: 'supermarket', prompt: '🏥 生病發燒（sick & fever）應該去哪裡，而不是超市（supermarket）？', options: ['supermarket', 'hospital', 'park'], valid: ['hospital'] },
+          { wrong: 'teacher', prompt: '🩺 在醫院開藥給病人的是誰，而不是老師（teacher）？', options: ['teacher', 'doctor', 'nurse'], valid: ['doctor', 'nurse'] }
+        ]
+      },
+      {
+        template: `"It is <strong>7:00 a.m.</strong> Time for school! I put my books and pencil box in my {0}. Then I eat {1} and drink milk."`,
+        slots: [
+          { wrong: 'bed', prompt: '🎒 上學前把課本和鉛筆盒放進哪裡，而不是床（bed）？', options: ['bed', 'bag', 'schoolbag'], valid: ['bag', 'schoolbag'] },
+          { wrong: 'soup', prompt: '🍞 早上搭配牛奶當早餐（7:00 a.m.）吃什麼最合理？', options: ['soup', 'bread', 'eggs'], valid: ['bread', 'eggs'] }
+        ]
+      },
+      {
+        template: `"We are at the {0}. My brother is flying a <strong>kite</strong>, and my sister is riding her {1}."`,
+        slots: [
+          { wrong: 'classroom', prompt: '🪁 放風箏（flying a kite）應該在戶外哪裡，而不是教室（classroom）？', options: ['classroom', 'park', 'playground'], valid: ['park', 'playground'] },
+          { wrong: 'desk', prompt: '🚲 妹妹正在騎（riding）她的什麼？', options: ['desk', 'bike', 'bicycle'], valid: ['bike', 'bicycle'] }
+        ]
+      },
+      {
+        template: `"My hands are <strong>dirty</strong>! I go to the {0} to wash them with water. Then I use a clean {1} to dry my hands."`,
+        slots: [
+          { wrong: 'bedroom', prompt: '🧼 手髒了要洗手（wash them with water），應該去哪裡？', options: ['bedroom', 'bathroom', 'washroom'], valid: ['bathroom', 'washroom'] },
+          { wrong: 'book', prompt: '🧻 洗完手要用乾淨的什麼擦乾，而不是書本（book）？', options: ['book', 'towel', 'tissue'], valid: ['towel', 'tissue'] }
+        ]
+      }
+    ];
+
+    // 第 4 關 10 組題庫
+    const stage4Bank = [
+      { sents: ['Mom is cooking in the kitchen.', 'The boy is sleeping in the {word}.', 'We are reading in the living room.'], errIdx: 1, wrong: 'bathroom', options: ['bathroom', 'bedroom', 'dining room'], correct: 'bedroom', drawHint: '在臥室（bedroom）床上睡覺的小男孩' },
+      { sents: ['The fish is swimming in the {word}.', 'The bird is flying in the sky.', 'The monkey is climbing a tree.'], errIdx: 0, wrong: 'tree', options: ['tree', 'water', 'river'], correct: 'water', drawHint: '在水裡（water / river）快樂游泳的小魚' },
+      { sents: ['Students are studying in the classroom.', 'The doctor is helping sick people in the {word}.', 'Kids are playing on the slide in the park.'], errIdx: 1, wrong: 'supermarket', options: ['supermarket', 'hospital', 'zoo'], correct: 'hospital', drawHint: '在醫院（hospital）照顧病人的醫生' },
+      { sents: ['We eat breakfast at 7:30 in the morning.', 'We eat lunch at 12:00 at noon.', 'We eat {word} at 7:00 in the evening.'], errIdx: 2, wrong: 'breakfast', options: ['breakfast', 'dinner', 'supper'], correct: 'dinner', drawHint: '晚上七點全家人一起吃晚餐（dinner）' },
+      { sents: ['I use a pencil to write my name.', 'I use an eraser to clean my mistakes.', 'I use a {word} to cut paper.'], errIdx: 2, wrong: 'ruler', options: ['ruler', 'scissors', 'knife'], correct: 'scissors', drawHint: '用剪刀（scissors）剪紙勞作' },
+      { sents: ['In summer, it is hot and sunny.', 'In winter, it is cold and {word}.', 'In spring, flowers are blooming.'], errIdx: 1, wrong: 'hot', options: ['hot', 'snowy', 'cold'], correct: 'snowy', drawHint: '冬天（winter）下雪堆雪人的場景' },
+      { sents: ['I see with my eyes.', 'I hear with my ears.', 'I smell flowers with my {word}.'], errIdx: 2, wrong: 'mouth', options: ['mouth', 'nose', 'hands'], correct: 'nose', drawHint: '用鼻子（nose）聞香香的花朵' },
+      { sents: ['Bananas are yellow.', 'Apples are red.', 'The clear sky is {word}.'], errIdx: 2, wrong: 'green', options: ['green', 'blue', 'white'], correct: 'blue', drawHint: '藍藍的天空（blue sky）與白雲' },
+      { sents: ['Monday comes after Sunday.', 'Wednesday comes after Tuesday.', 'Saturday comes after {word}.'], errIdx: 2, wrong: 'Monday', options: ['Monday', 'Friday', 'Thursday'], correct: 'Friday', drawHint: '星期五（Friday）放學準備迎接週末' },
+      { sents: ['My father and mother are my parents.', 'My father\'s brother is my {word}.', 'My mother\'s mother is my grandmother.'], errIdx: 1, wrong: 'aunt', options: ['aunt', 'uncle', 'cousin'], correct: 'uncle', drawHint: '叔叔/伯伯（uncle）開心地笑著' }
+    ];
+
+    const currentVariant = { 1: 0, 2: 0, 3: 0, 4: 0 };
+
+    // 隨機抽籤進入關卡（一次為四大關卡全部抽出新題目，並自動跳轉至抽中關卡）
+    window.drawRandomMission = function drawRandomMission() {
+      const btn = document.getElementById('btn-draw-all');
+      const reel = document.getElementById('lottery-reel');
+      const stageTxt = document.getElementById('lottery-stage-txt');
+      const titleTxt = document.getElementById('lottery-title-txt');
+      btn.disabled = true;
+
+      const stageNames = {
+        1: '第 1 關｜失蹤的招牌',
+        2: '第 2 關｜亂碼分類清單',
+        3: '第 3 關｜矛盾的偵探日記',
+        4: '第 4 關｜修復大百科插畫'
+      };
+
+      let ticks = 0;
+      const spinInterval = setInterval(() => {
+        const randStage = Math.floor(Math.random() * 4) + 1;
+        const randQ = Math.floor(Math.random() * 10) + 1;
+        reel.textContent = `S${randStage}`;
+        stageTxt.textContent = `🎰 四關同時洗牌中... 第 ${randStage} 關`;
+        titleTxt.textContent = `抽取第 #${randQ} 號題組...`;
+        playTone(420 + ticks * 25, 'sine', 0.06);
+        ticks++;
+
+        if (ticks >= 14) {
+          clearInterval(spinInterval);
+          btn.disabled = false;
+
+          // 四大關卡全部隨機抽取不重複的新題組
+          const newIdxs = {};
+          for (let s = 1; s <= 4; s++) {
+            let r = Math.floor(Math.random() * 10);
+            if (r === currentVariant[s]) r = (r + 1) % 10;
+            newIdxs[s] = r;
+            loadStageVariant(s, r);
+          }
+
+          const finalStage = Math.floor(Math.random() * 4) + 1;
+          const finalIdx = newIdxs[finalStage];
+          reel.textContent = `#${finalIdx + 1}`;
+          stageTxt.textContent = `🎯 四關已全數換新題！優先進入 STAGE 0${finalStage}`;
+          titleTxt.textContent = `${stageNames[finalStage]}（第 ${finalIdx + 1} 題）`;
+
+          switchStage(finalStage);
+          playTone('success');
+          showToast(`🎲 四大關卡全部抽出新題組！目前進入【${stageNames[finalStage]}】#${finalIdx + 1}`, 'success');
+        }
+      }, 65);
+    };
+
+    window.rerollCurrentStage = function rerollCurrentStage() {
+      let activeStage = 1;
+      for (let i = 1; i <= 4; i++) {
+        if (document.getElementById(`panel-${i}`).classList.contains('active')) activeStage = i;
+      }
+      let nextIdx = Math.floor(Math.random() * 10);
+      if (nextIdx === currentVariant[activeStage]) nextIdx = (nextIdx + 1) % 10;
+      loadStageVariant(activeStage, nextIdx);
+      playTone('click');
+      showToast(`🔄 已為第 ${activeStage} 關隨機切換至第 ${nextIdx + 1} 號題組！`, 'info');
+    };
+
+    function loadStageVariant(stage, idx) {
+      currentVariant[stage] = idx;
+      const tabQ = document.getElementById(`tab-q-${stage}`);
+      if (tabQ) tabQ.textContent = `#${idx + 1}`;
+      if (stage === 1) initStage1(idx);
+      if (stage === 2) initStage2(idx);
+      if (stage === 3) initStage3(idx);
+      if (stage === 4) initStage4(idx);
+    }
+
+    // ==================== 1. 課堂倒數計時器 ====================
+    let totalSeconds = 90 * 60;
+    let timerInterval = null;
+
+    function renderTimer() {
+      const m = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const s = String(totalSeconds % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `${m}:${s}`;
+    }
+
+    window.toggleTimer = function toggleTimer() {
+      const btn = document.getElementById('btn-timer-toggle');
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.textContent = '▶️ 繼續';
+      } else {
+        timerInterval = setInterval(() => {
+          if (totalSeconds > 0) {
+            totalSeconds--;
+            renderTimer();
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            playTone('success');
+            showToast('⏰ 時間到！請小偵探們準備報告答案！', 'info');
+          }
+        }, 1000);
+        btn.textContent = '⏸️ 暫停';
+      }
+    };
+
+    window.resetTimer = function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      totalSeconds = 90 * 60;
+      document.getElementById('timer-label').textContent = '⏱️ 任務倒數';
+      document.getElementById('btn-timer-toggle').textContent = '▶️ 開始';
+      renderTimer();
+    };
+
+    window.setTimer = function setTimer(mins, label) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      totalSeconds = mins * 60;
+      document.getElementById('timer-label').textContent = label;
+      document.getElementById('btn-timer-toggle').textContent = '▶️ 開始';
+      renderTimer();
+      playTone('click');
+      showToast(`已設定計時器：${mins} 分鐘`, 'info');
+    };
+
+    // ==================== 2. 關卡切換與拼圖解鎖 ====================
+    const solvedStages = { 1: false, 2: false, 3: false, 4: false };
+    const stageLetters = { 1: 'S', 2: 'A', 3: 'V', 4: 'E' };
+
+    window.switchStage = function switchStage(num) {
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`tab-${i}`).classList.toggle('active', i === num);
+        document.getElementById(`panel-${i}`).classList.toggle('active', i === num);
+      }
+      if (num === 4) setTimeout(resizeCanvas, 50);
+    };
+
+    function unlockStagePiece(stageNum, toastMsg) {
+      solvedStages[stageNum] = true;
+      document.getElementById(`tab-${stageNum}`).classList.add('solved');
+      document.getElementById(`status-${stageNum}`).textContent = '✅ 已破關';
+      document.getElementById(`slot-${stageNum}`).classList.add('unlocked');
+      document.getElementById(`letter-${stageNum}`).textContent = stageLetters[stageNum];
+
+      // 僅在已鎖定小隊的情況下，自動為本機小隊加 1 顆星星並同步
+      let bonusMsg = '';
+      if (isTeamLocked && lockedTeamId) {
+        const activeTeam = window.teams.find(t => t.id === lockedTeamId);
+        if (activeTeam) {
+          activeTeam.score += 1;
+          window.renderScoreboard();
+          if (typeof window.syncTeamToCloud === 'function') {
+            window.syncTeamToCloud(activeTeam);
+          }
+          bonusMsg = `（${activeTeam.icon} ${activeTeam.name} 獲得 +1 ⭐！）`;
+        }
+      } else {
+        bonusMsg = '（提醒：請先在上方抽籤機右側「確認鎖定」隊伍，之後答對才會累積星星喔！）';
+      }
+
+      playTone('success');
+      launchConfetti();
+      showToast(toastMsg + bonusMsg, 'success');
+    }
+
+    // ==================== Stage 1 邏輯 ====================
+    const signSelected = { A: false, B: false, C: false };
+    const signAnswers = { A: '', B: '', C: '' };
+
+    function initStage1(idx) {
+      const q = stage1Bank[idx];
+      document.getElementById('s1-variant-tag').textContent = `題組 #${idx + 1} / 10`;
+      const fb = document.getElementById('fb-1');
+      fb.className = 'feedback';
+      fb.textContent = '';
+
+      const ids = ['A', 'B', 'C'];
+      const grid = document.getElementById('s1-cards-grid');
+      grid.innerHTML = q.cards.map((c, i) => {
+        const id = ids[i];
+        signSelected[id] = false;
+        signAnswers[id] = c.shown;
+        const pillsHtml = q.choices.map(w => `
+          <button type="button" class="word-pill font-en ${w === c.shown ? 'active' : ''}"
+            onclick="pickSignWord(event, '${id}', '${w}')">${w}</button>
+        `).join('');
+        return `
+          <div class="sign-card" id="card-${id}" onclick="toggleSignCard('${id}')">
+            <div class="card-badge">圖片 ${id}</div>
+            <div class="svg-frame">${svgArt[c.art]}</div>
+            <div><span class="sign-plaque font-en" id="plaque-${id}">${c.shown}</span></div>
+            <div class="fix-box" onclick="event.stopPropagation()">
+              <div style="font-size:0.85rem;font-weight:800;color:var(--berry);margin-bottom:4px;">👆 點選正確的招牌單字：</div>
+              <div class="word-pills" id="pills-${id}">${pillsHtml}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.toggleSignCard = function toggleSignCard(id) {
+      signSelected[id] = !signSelected[id];
+      document.getElementById('card-' + id).classList.toggle('selected', signSelected[id]);
+      playTone(signSelected[id] ? 520 : 380, 'sine', 0.1);
+    };
+
+    window.pickSignWord = function pickSignWord(event, id, word) {
+      if (event) event.stopPropagation();
+      const q = stage1Bank[currentVariant[1]];
+      const cardIdx = id === 'A' ? 0 : id === 'B' ? 1 : 2;
+      signAnswers[id] = word;
+
+      const plaque = document.getElementById('plaque-' + id);
+      plaque.textContent = word;
+      plaque.classList.toggle('changed', word !== q.cards[cardIdx].shown);
+
+      const pills = document.querySelectorAll('#pills-' + id + ' .word-pill');
+      pills.forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim() === word);
+      });
+      playTone(620, 'triangle', 0.12);
+    };
+
+    window.checkStage1 = function checkStage1() {
+      const fb = document.getElementById('fb-1');
+      const q = stage1Bank[currentVariant[1]];
+      const ids = ['A', 'B', 'C'];
+
+      for (let i = 0; i < 3; i++) {
+        const c = q.cards[i];
+        const id = ids[i];
+        if (c.shown === c.correct && signSelected[id]) {
+          fb.className = 'feedback err';
+          fb.textContent = `💡 提示：圖片 ${id}（${c.shown}）本來就是圖文相符的喔！請再點一下圖片 ${id} 取消選取它。`;
+          playTone('error');
+          return;
+        }
+      }
+
+      const allRight = q.cards.every((c, i) => {
+        const id = ids[i];
+        const isWrongCard = c.shown !== c.correct;
+        return (isWrongCard ? signSelected[id] : !signSelected[id]) && signAnswers[id] === c.correct;
+      });
+
+      if (allRight) {
+        const fixedWords = q.cards.filter(c => c.shown !== c.correct).map(c => `<b>${c.correct}</b>`).join(' 和 ');
+        fb.className = 'feedback ok';
+        fb.innerHTML = `🎉 太棒了！你成功揪出錯誤並把單字修成 ${fixedWords} 了！獲得第 1 片密碼拼圖：<b>S</b>`;
+        unlockStagePiece(1, '🎉 第 1 關破關！獲得啟動拼圖字母「S」！');
+      } else {
+        fb.className = 'feedback err';
+        fb.textContent = '🔍 還沒完全對喔！請點選圖文不符的兩張卡片，並把下方的招牌單字改成正確單字。';
+        playTone('error');
+      }
+    };
+
+    // ==================== Stage 2 邏輯 ====================
+    let menuItems = [];
+
+    function initStage2(idx) {
+      const q = stage2Bank[idx];
+      document.getElementById('s2-variant-tag').textContent = `題組 #${idx + 1} / 10`;
+      document.getElementById('s2-board-title').textContent = q.title;
+      document.getElementById('s2-catA-title').textContent = q.catA;
+      document.getElementById('s2-catB-title').textContent = q.catB;
+      const fb = document.getElementById('fb-2');
+      fb.className = 'feedback';
+      fb.textContent = '';
+
+      menuItems = q.items.map((item, i) => ({
+        id: i + 1,
+        wrong: item.wrong,
+        correct: item.correct,
+        cat: item.cat,
+        userText: '',
+        userCat: ''
+      }));
+      renderMenuTasks();
+    }
+
+    function renderMenuTasks() {
+      const q = stage2Bank[currentVariant[2]];
+      const list = document.getElementById('scramble-list');
+      list.innerHTML = menuItems.map(item => `
+        <div class="scramble-row">
+          <span class="wrong-word-tag">${item.wrong}</span>
+          <span>➡️</span>
+          <input class="spell-input" type="text" placeholder="輸入正確拼字" value="${item.userText}"
+            oninput="updateMenuInput(${item.id}, this.value)" />
+          <div class="cat-btn-group">
+            <button class="cat-btn ${item.userCat === 'A' ? 'active-food' : ''}" onclick="setMenuCat(${item.id}, 'A')">${q.catA.split('（')[0]}</button>
+            <button class="cat-btn ${item.userCat === 'B' ? 'active-drink' : ''}" onclick="setMenuCat(${item.id}, 'B')">${q.catB.split('（')[0]}</button>
+          </div>
+        </div>
+      `).join('');
+      renderLiveMenuBoard();
+    }
+
+    window.updateMenuInput = function updateMenuInput(id, val) {
+      const target = menuItems.find(m => m.id === id);
+      if (target) target.userText = val.trim().toLowerCase();
+      renderLiveMenuBoard();
+    };
+
+    window.setMenuCat = function setMenuCat(id, cat) {
+      const target = menuItems.find(m => m.id === id);
+      if (target) target.userCat = cat;
+      playTone('click');
+      renderMenuTasks();
+    };
+
+    function renderLiveMenuBoard() {
+      const listA = menuItems.filter(m => m.userCat === 'A' && m.userText);
+      const listB = menuItems.filter(m => m.userCat === 'B' && m.userText);
+      document.getElementById('menu-food-list').innerHTML = listA.length
+        ? listA.map(f => `<div class="menu-chip">${f.userText}</div>`).join('')
+        : '<div style="font-size:0.78rem;color:var(--ink-muted);text-align:center;">尚未放入項目</div>';
+      document.getElementById('menu-drink-list').innerHTML = listB.length
+        ? listB.map(d => `<div class="menu-chip">${d.userText}</div>`).join('')
+        : '<div style="font-size:0.78rem;color:var(--ink-muted);text-align:center;">尚未放入項目</div>';
+    }
+
+    window.checkStage2 = function checkStage2() {
+      const fb = document.getElementById('fb-2');
+      const allSpellOk = menuItems.every(m => m.userText === m.correct);
+      const allCatOk = menuItems.every(m => m.userCat === m.cat);
+      if (!allSpellOk) {
+        fb.className = 'feedback err';
+        fb.textContent = '🔍 還有單字的字母拼錯囉！再仔細檢查一下每個單字的拼寫！';
+        playTone('error');
+        return;
+      }
+      if (!allCatOk) {
+        fb.className = 'feedback err';
+        fb.textContent = '👏 拼字全對了！別忘了幫每個單字點選右邊的分類按鈕喔！';
+        playTone('error');
+        return;
+      }
+      fb.className = 'feedback ok';
+      fb.innerHTML = '🎉 拼字與分類全部正確！獲得第 2 片密碼拼圖：<b>A</b>';
+      unlockStagePiece(2, '🎉 第 2 關破關！獲得啟動拼圖字母「A」！');
+    }
+
+    // ==================== Stage 3 邏輯 ====================
+    const diaryState = { s0: '', s1: '' };
+
+    function initStage3(idx) {
+      const q = stage3Bank[idx];
+      document.getElementById('s3-variant-tag').textContent = `題組 #${idx + 1} / 10`;
+      diaryState.s0 = q.slots[0].wrong;
+      diaryState.s1 = q.slots[1].wrong;
+      document.getElementById('diary-picker').classList.remove('open');
+      const fb = document.getElementById('fb-3');
+      fb.className = 'feedback';
+      fb.textContent = '';
+
+      const html = q.template
+        .replace('{0}', `<span id="dw-s0" class="diary-word" onclick="openDiaryPicker(0)">${q.slots[0].wrong}</span>`)
+        .replace('{1}', `<span id="dw-s1" class="diary-word" onclick="openDiaryPicker(1)">${q.slots[1].wrong}</span>`);
+      document.getElementById('diary-paper').innerHTML = html;
+    }
+
+    window.openDiaryPicker = function openDiaryPicker(slotIdx) {
+      const q = stage3Bank[currentVariant[3]];
+      const slot = q.slots[slotIdx];
+      const box = document.getElementById('diary-picker');
+      const title = document.getElementById('diary-picker-title');
+      const choices = document.getElementById('diary-picker-choices');
+      box.classList.add('open');
+      playTone('click');
+
+      title.textContent = slot.prompt;
+      choices.innerHTML = slot.options.map(opt => {
+        const isOrig = opt === slot.wrong;
+        return `<button class="btn btn-sm ${isOrig ? 'btn-paper' : 'btn-olive'} font-en" onclick="pickDiaryWord(${slotIdx}, '${opt}')">${opt}</button>`;
+      }).join('');
+    }
+
+    window.pickDiaryWord = function pickDiaryWord(slotIdx, word) {
+      const q = stage3Bank[currentVariant[3]];
+      const slot = q.slots[slotIdx];
+      diaryState[`s${slotIdx}`] = word;
+      const el = document.getElementById(`dw-s${slotIdx}`);
+      el.textContent = word;
+      el.classList.toggle('fixed', slot.valid.includes(word));
+      playTone('click');
+    }
+
+    window.checkStage3 = function checkStage3() {
+      const fb = document.getElementById('fb-3');
+      const q = stage3Bank[currentVariant[3]];
+      const ok0 = q.slots[0].valid.includes(diaryState.s0);
+      const ok1 = q.slots[1].valid.includes(diaryState.s1);
+      if (!ok0 || !ok1) {
+        fb.className = 'feedback err';
+        fb.textContent = '🔍 日記裡還有前後矛盾的地方喔！請點擊兩個發亮的黃底單字，換成符合情境的英文單字！';
+        playTone('error');
+        return;
+      }
+      fb.className = 'feedback ok';
+      fb.innerHTML = '🎉 日記邏輯完全通順了！獲得第 3 片密碼拼圖：<b>V</b>';
+      unlockStagePiece(3, '🎉 第 3 關破關！獲得啟動拼圖字母「V」！');
+    }
+
+    // ==================== Stage 4 邏輯與繪圖板 ====================
+    let selectedSentence = -1;
+    let s4ChosenWord = '';
+
+    function initStage4(idx) {
+      const q = stage4Bank[idx];
+      document.getElementById('s4-variant-tag').textContent = `題組 #${idx + 1} / 10`;
+      selectedSentence = -1;
+      s4ChosenWord = q.wrong;
+      const fb = document.getElementById('fb-4');
+      fb.className = 'feedback';
+      fb.textContent = '';
+
+      const box = document.getElementById('s4-sentences-box');
+      box.innerHTML = q.sents.map((s, i) => {
+        const displaySentence = `${i + 1}. ${s.replace('{word}', q.wrong)}`;
+        if (i === q.errIdx) {
+          const opts = q.options.map(o => `<option value="${o}">${o}</option>`).join('');
+          return `
+            <div id="sent-${i}" class="sentence-card" onclick="selectSentence(${i})">
+              <div class="sentence-text" id="sent-err-text">${displaySentence}</div>
+              <div id="sent-err-fix" style="display:none;margin-top:8px;padding-top:8px;border-top:1.5px dashed var(--berry);" onclick="event.stopPropagation()">
+                <span style="font-size:0.84rem;font-weight:900;color:var(--berry);">把 ${q.wrong} 改成：</span>
+                <select id="fix-s4-word" class="styled-select" style="width:auto;display:inline-block;" onchange="updateSentence4Preview()">
+                  ${opts}
+                </select>
+              </div>
+            </div>
+          `;
+        }
+        return `
+          <div id="sent-${i}" class="sentence-card" onclick="selectSentence(${i})">
+            <div class="sentence-text">${displaySentence}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.selectSentence = function selectSentence(idx) {
+      const q = stage4Bank[currentVariant[4]];
+      selectedSentence = idx;
+      for (let i = 0; i < 3; i++) {
+        document.getElementById(`sent-${i}`).classList.toggle('selected-err', i === idx);
+      }
+      const fixDiv = document.getElementById('sent-err-fix');
+      if (fixDiv) fixDiv.style.display = idx === q.errIdx ? 'block' : 'none';
+      playTone('click');
+    }
+
+    window.updateSentence4Preview = function updateSentence4Preview() {
+      const q = stage4Bank[currentVariant[4]];
+      s4ChosenWord = document.getElementById('fix-s4-word').value;
+      document.getElementById('sent-err-text').textContent = `${q.errIdx + 1}. ${q.sents[q.errIdx].replace('{word}', s4ChosenWord)}`;
+    }
+
+    window.checkStage4 = function checkStage4() {
+      const fb = document.getElementById('fb-4');
+      const q = stage4Bank[currentVariant[4]];
+      if (selectedSentence !== q.errIdx || s4ChosenWord.toLowerCase() !== q.correct.toLowerCase()) {
+        fb.className = 'feedback err';
+        fb.textContent = `🔍 請先點選不合理的第 ${q.errIdx + 1} 句，並把 ${q.wrong} 改成 ${q.correct} 喔！`;
+        playTone('error');
+        return;
+      }
+      fb.className = 'feedback ok';
+      fb.innerHTML = '🎉 句子修正與插畫完成！集齊最後一片拼圖字母：<b>E</b>';
+      unlockStagePiece(4, '🎉 第 4 關破關！集齊最後一片拼圖字母「E」！');
+    }
+
+    // Canvas 繪圖板
+    let currentBrushColor = '#3b2d1f';
+    let isDrawing = false;
+
+    function initPalette() {
+      const colors = ['#3b2d1f', '#c94a38', '#e68a2e', '#244b35', '#2e86c1', '#8e44ad'];
+      const group = document.getElementById('swatch-group');
+      group.innerHTML = colors.map((c, i) => `
+        <div class="swatch ${i === 0 ? 'active' : ''}" style="background:${c};" onclick="pickColor('${c}', this)"></div>
+      `).join('');
+    }
+
+    window.pickColor = function pickColor(color, el) {
+      currentBrushColor = color;
+      document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    };
+
+    function resizeCanvas() {
+      const canvas = document.getElementById('art-canvas');
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width > 0) {
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+    }
+
+    window.clearCanvas = function clearCanvas() {
+      const canvas = document.getElementById('art-canvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
+
+    const canvasEl = document.getElementById('art-canvas');
+    function getPos(e) {
+      const rect = canvasEl.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      const ctx = canvasEl.getContext('2d');
+      const pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+      ctx.strokeStyle = currentBrushColor;
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+    }
+
+    function moveDraw(e) {
+      if (!isDrawing) return;
+      if (e.cancelable) e.preventDefault();
+      const ctx = canvasEl.getContext('2d');
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+
+    function endDraw() {
+      isDrawing = false;
+    }
+
+    canvasEl.addEventListener('mousedown', startDraw);
+    canvasEl.addEventListener('mousemove', moveDraw);
+    window.addEventListener('mouseup', endDraw);
+    canvasEl.addEventListener('touchstart', startDraw, { passive: false });
+    canvasEl.addEventListener('touchmove', moveDraw, { passive: false });
+    canvasEl.addEventListener('touchend', endDraw);
+    window.addEventListener('resize', resizeCanvas);
+
+    // ==================== 最終密碼與四色小隊計分板 ====================
+    window.openCertificateModal = function openCertificateModal() {
+      const iconEl = document.getElementById('cert-team-icon');
+      const nameEl = document.getElementById('cert-team-name');
+      const starsEl = document.getElementById('cert-team-stars');
+      const dateEl = document.getElementById('cert-date');
+
+      if (isTeamLocked && lockedTeamId) {
+        const myTeam = window.teams.find(t => t.id === lockedTeamId);
+        if (myTeam) {
+          iconEl.textContent = myTeam.icon;
+          nameEl.textContent = myTeam.name;
+          starsEl.textContent = `（${myTeam.score} ⭐）`;
+        }
+      } else {
+        iconEl.textContent = '🕵️';
+        nameEl.textContent = '摩爾小偵探全體隊員';
+        starsEl.textContent = '';
+      }
+
+      const today = new Date();
+      dateEl.textContent = `日期：${today.getFullYear()} 年 ${today.getMonth() + 1} 月 ${today.getDate()} 日`;
+      document.getElementById('cert-modal').classList.add('open');
+    };
+
+    window.closeCertificateModal = function closeCertificateModal() {
+      document.getElementById('cert-modal').classList.remove('open');
+    };
+
+    window.downloadCertificatePNG = function downloadCertificatePNG() {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1100;
+        canvas.height = 760;
+        const ctx = canvas.getContext('2d');
+
+        // 1. 米白底色與外框
+        ctx.fillStyle = '#fdf3dc';
+        ctx.fillRect(0, 0, 1100, 760);
+
+        ctx.fillStyle = '#fffdf9';
+        ctx.strokeStyle = '#4a3723';
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.roundRect(28, 28, 1044, 704, 32);
+        ctx.fill();
+        ctx.stroke();
+
+        // 2. 金色雙線內框
+        ctx.strokeStyle = '#c68b2c';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.roundRect(48, 48, 1004, 664, 22);
+        ctx.stroke();
+
+        // 3. 頂部深綠橫幅
+        ctx.fillStyle = '#244b35';
+        ctx.beginPath();
+        ctx.roundRect(330, 82, 440, 44, 22);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 20px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('MOLE MANOR DETECTIVE AGENCY', 550, 111);
+
+        // 4. 獎牌與標題
+        ctx.font = '54px sans-serif';
+        ctx.fillText('🏅📖✨', 550, 185);
+
+        ctx.fillStyle = '#244b35';
+        ctx.font = '900 42px "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+        ctx.fillText('摩爾莊園「首席小偵探」榮譽證書', 550, 248);
+
+        ctx.fillStyle = '#6e5a46';
+        ctx.font = 'bold 23px "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+        ctx.fillText('茲表揚以下偵探小隊成功破解搗蛋鬼庫拉的謎題，啟動印刷機救回《莊園生活大百科》：', 550, 302);
+
+        // 5. 小隊專屬榮譽橫幅
+        const teamIcon = document.getElementById('cert-team-icon').textContent || '🕵️';
+        const teamName = document.getElementById('cert-team-name').textContent || '摩爾神探小隊';
+        const teamStars = document.getElementById('cert-team-stars').textContent || '';
+        const bannerText = `${teamIcon} ${teamName} ${teamStars}`.trim();
+
+        ctx.fillStyle = '#fdebd0';
+        ctx.strokeStyle = '#4a3723';
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.roundRect(210, 336, 680, 84, 24);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#3b2d1f';
+        ctx.font = '900 36px "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+        ctx.fillText(bannerText, 550, 390);
+
+        // 6. 鼓勵內文
+        ctx.fillStyle = '#3b2d1f';
+        ctx.font = 'bold 25px "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+        ctx.fillText('你們在任務中展現了超強的英文單字觀察力、拼字魔法與團隊合作精神！', 550, 476);
+        ctx.fillText('特頒發此證書，鼓勵你們繼續快樂學英文！', 550, 520);
+
+        // 7. 底部虛線與簽章
+        ctx.save();
+        ctx.setLineDash([10, 8]);
+        ctx.strokeStyle = 'rgba(74, 55, 35, 0.35)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(100, 565);
+        ctx.lineTo(1000, 565);
+        ctx.stroke();
+        ctx.restore();
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#6e5a46';
+        ctx.font = 'bold 22px "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+        ctx.fillText('頒發單位：摩爾莊園大百科編輯部', 110, 622);
+        ctx.fillText(document.getElementById('cert-date').textContent, 110, 662);
+
+        // 右下角圓形印章
+        ctx.save();
+        ctx.translate(910, 636);
+        ctx.rotate(-10 * Math.PI / 180);
+        ctx.fillStyle = 'rgba(250, 219, 216, 0.45)';
+        ctx.strokeStyle = '#c94a38';
+        ctx.lineWidth = 5;
+        ctx.setLineDash([8, 6]);
+        ctx.beginPath();
+        ctx.arc(0, 0, 62, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#c94a38';
+        ctx.textAlign = 'center';
+        ctx.font = '900 20px "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+        ctx.fillText('任務成功', 0, -6);
+        ctx.font = '900 22px sans-serif';
+        ctx.fillText('GREAT JOB!', 0, 22);
+        ctx.restore();
+
+        // 8. 觸發 PNG 圖檔下載
+        const dataUrl = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = `摩爾莊園榮譽證書_${teamName}.png`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        playTone('success');
+        showToast('📥 證書圖檔已開始下載！請查看瀏覽器下載清單喔！', 'success');
+      } catch (err) {
+        playTone('error');
+        showToast('⚠️ 預覽視窗限制直接下載，請直接截圖保存或匯出 HTML 開啟！', 'error');
+      }
+    };
+
+    window.unlockPrintingPress = function unlockPrintingPress() {
+      const val = document.getElementById('passcode-input').value.trim().toUpperCase();
+      const fb = document.getElementById('fb-vault');
+      if (val === 'SAVE') {
+        fb.className = 'feedback ok';
+        fb.innerHTML = '🎊 密碼正確（SAVE）！印刷機轟隆隆啟動，《莊園生活大百科》成功印製完成！';
+        document.getElementById('btn-reopen-cert').style.display = 'inline-flex';
+        playTone('success');
+        launchConfetti();
+        showToast('🎊 任務大成功！拯救《莊園生活大百科》！', 'success');
+        setTimeout(() => {
+          openCertificateModal();
+        }, 450);
+      } else {
+        fb.className = 'feedback err';
+        fb.textContent = '🔒 密碼不對喔！集齊四大關卡的 4 個字母，拼成「拯救」的英文單字（S-A-V-E）！';
+        playTone('error');
+      }
+    };
+
+    window.teams = [
+      { id: 1, icon: '🔴', name: '紅隊（待登錄）', score: 0 },
+      { id: 2, icon: '🔵', name: '藍隊（待登錄）', score: 0 },
+      { id: 3, icon: '🟢', name: '綠隊（待登錄）', score: 0 },
+      { id: 4, icon: '🟡', name: '黃隊（待登錄）', score: 0 }
+    ];
+    let selectedSetupColorId = 1;
+    let lockedTeamId = null;
+    let isTeamLocked = false;
+
+    window.selectSetupColor = function selectSetupColor(id) {
+      if (isTeamLocked) return;
+      selectedSetupColorId = id;
+      document.querySelectorAll('#color-choices .color-opt').forEach(btn => {
+        btn.classList.toggle('selected', Number(btn.dataset.id) === id);
+      });
+      playTone('click');
+    };
+
+    window.lockMyTeam = function lockMyTeam() {
+      if (isTeamLocked) return;
+      const input = document.getElementById('setup-team-name');
+      const rawName = input.value.trim();
+      if (!rawName) {
+        playTone('error');
+        showToast('⚠️ 請先輸入你們的隊伍名稱再按確認鎖定！', 'error');
+        input.focus();
+        return;
+      }
+
+      lockedTeamId = selectedSetupColorId;
+      isTeamLocked = true;
+
+      // 鎖定所有輸入與顏色選項，不可重來
+      input.disabled = true;
+      document.querySelectorAll('#color-choices .color-opt').forEach(btn => {
+        btn.disabled = true;
+      });
+      const lockBtn = document.getElementById('btn-lock-team');
+      lockBtn.disabled = true;
+      lockBtn.textContent = '✅ 已鎖定';
+
+      const badge = document.getElementById('team-lock-badge');
+      badge.className = 'badge-pill badge-olive';
+      badge.textContent = '🔒 已鎖定隊伍';
+
+      const target = window.teams.find(t => t.id === lockedTeamId);
+      if (target) {
+        target.name = rawName;
+        document.getElementById('setup-hint').style.color = 'var(--forest)';
+        document.getElementById('setup-hint').textContent = `🎉 本機已鎖定為【${target.icon} ${target.name}】（不可更改），快開始答題集星星吧！`;
+        window.renderScoreboard();
+        if (typeof window.syncTeamToCloud === 'function') {
+          window.syncTeamToCloud(target);
+        }
+        playTone('success');
+        showToast(`🔒 已鎖定為【${target.icon} ${target.name}】，不可再更改囉！`, 'success');
+      }
+    };
+
+    window.renderScoreboard = function renderScoreboard() {
+      const grid = document.getElementById('teams-grid');
+      if (!grid) return;
+
+      grid.innerHTML = window.teams.map(t => {
+        const isMine = isTeamLocked && t.id === lockedTeamId;
+        const starCount = Math.min(t.score, 20);
+        const stars = starCount > 0 ? '⭐'.repeat(starCount) : '尚未獲得星星';
+        return `
+          <div class="team-card ${isMine ? 'my-team' : ''}">
+            <div class="team-top">
+              <span style="font-size:1.15rem;">${t.icon}</span>
+              <span class="team-display-name">${t.name}</span>
+              <span class="team-pts">${t.score} ⭐</span>
+            </div>
+            <div class="team-stars">${stars}</div>
+            <div class="turn-badge">${isMine ? '💻 本機鎖定隊伍' : '👀 即時同步顯示'}</div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    window.openResetModal = function openResetModal() {
+      document.getElementById('reset-pwd-input').value = '';
+      document.getElementById('reset-pwd-err').textContent = '';
+      document.getElementById('reset-modal').classList.add('open');
+      setTimeout(() => document.getElementById('reset-pwd-input').focus(), 50);
+    };
+
+    window.closeResetModal = function closeResetModal() {
+      document.getElementById('reset-modal').classList.remove('open');
+    };
+
+    window.confirmResetScores = function confirmResetScores() {
+      const pwd = document.getElementById('reset-pwd-input').value.trim();
+      const errEl = document.getElementById('reset-pwd-err');
+      if (pwd !== '1207') {
+        errEl.textContent = '❌ 密碼錯誤，無法歸零！';
+        playTone('error');
+        return;
+      }
+
+      window.teams.forEach(t => {
+        t.score = 0;
+        if (typeof window.syncTeamToCloud === 'function') {
+          window.syncTeamToCloud(t);
+        }
+      });
+      window.renderScoreboard();
+      window.closeResetModal();
+      playTone('success');
+      showToast('✅ 密碼驗證成功，已將全班所有小隊星星歸零！', 'success');
+    };
+
+    // 初始化
+    window.onload = function () {
+      renderTimer();
+      window.renderScoreboard();
+      loadStageVariant(1, 0);
+      loadStageVariant(2, 0);
+      loadStageVariant(3, 0);
+      loadStageVariant(4, 0);
+      initPalette();
+      resizeCanvas();
+    };
+  </script>
+</body>
+</html>
